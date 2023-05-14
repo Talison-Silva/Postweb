@@ -1,0 +1,61 @@
+.postagens-back
+{
+    //box settings
+    margin-top: 30px;
+    min-width: 50%;
+    min-height: 30vh;
+    border-radius: 10px 0 10px 0;
+
+    //color
+    background-color: rgba(8, 24, 44,0.5);
+
+    //flexbox
+    display: grid;
+    grid-template-columns: auto;
+
+    .postagens
+    {
+        //box settings
+        min-width: 80%;
+
+        //color
+        background-color: rgb(8, 24, 44);
+        color: rgb(113, 139, 170);
+
+        //flexbox
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+
+        //childen
+        h1
+        {
+            font-size: 30px;
+        }
+        //childen
+        p
+        {
+            font-size: 15px;
+        }
+        //childen
+        .buttons
+        {
+            //childen
+            button
+            {
+                //box settings
+                width: 200px;
+                height: 30px;
+                border-radius: 10px;
+
+                //color
+                color: rgb(24, 2, 44);
+            }
+            //alternates
+            .edit{background-color: rgb(99, 138, 163);}
+            .lermais{background-color: rgb(126, 202, 124);}
+            .delete{background-color: rgb(238, 38, 81);}
+        }
+    }
+}

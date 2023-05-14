@@ -1,0 +1,20 @@
+*
+{
+    //css eraser
+    padding:0;
+    margin:0;
+    vertical-align:baseline;
+    list-style:none;
+    border:0
+}
+
+html,body
+{
+    min-height: 100vh;
+}
+
+body
+{
+    background-color: rgb(26, 36, 49);
+    overflow-x: hidden;
+}
