@@ -1,0 +1,11 @@
+#pt:checked + span,
+#pt:focus + span{
+  background-color: white;
+  color: #141717;
+}
+
+#in:checked + span,
+#in:focus + span{
+  background-color: white;
+  color: #141717;
+}

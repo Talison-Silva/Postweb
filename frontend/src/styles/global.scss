@@ -1,5 +1,12 @@
-*
-{
+@tailwind base;
+@tailwind components;
+@font-face {
+    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Ubuntu Mono', monospace;
+}
+@tailwind utilities;
+
+*{
     //css eraser
     padding:0;
     margin:0;
@@ -8,13 +15,13 @@
     border:0
 }
 
-html,body
+html,body,#root,#app
 {
     min-height: 100vh;
 }
 
 body
 {
-    background-color: rgb(26, 36, 49);
+    background-color: #070808;
     overflow-x: hidden;
 }
