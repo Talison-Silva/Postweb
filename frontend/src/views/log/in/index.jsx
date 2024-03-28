@@ -8,19 +8,18 @@ function IN(){
     const [status,setStatus]=useState({status:0,state:3})
     const navigate= useNavigate();
 
-    async function submit(fields){
-        try{
-            var {data}=await api.post('/users/authenticate',fields)
-
-            if(data.token){localStorage.setItem("token",data.token)}
-
+    async function submit(fields){        
+        await api.post("/users/authenticate",fields).then(({data})=>{                        
+            localStorage.setItem("token",data.token)
             setStatus({status:200,state:1})
 
-            navigate("/me")
-        }catch(err){
+            setTimeout(()=>{
+                navigate("/me")
+            },1000)
+        }).catch((err)=>{
             setStatus({status:500,state:2})
             console.error(err)
-        }
+        })
     }
     // code - 201
     return(
@@ -35,19 +34,19 @@ function IN(){
                 <div>
                     <label className="mb-2 w-full min-h-min flex flex-col">
                         <h1 className="uppercase text-xl text-white font-ubuntuMono">UserName:</h1>
-                        <input type="text" name="username" {...register('username')} className="p-5 w-full h-12 outline-none rounded-xl border border-solid border-[#383838] bg-transparent text-white font-ubuntuMono text-xl"/>
+                        <input type="text" name="username" {...register('username')} className="mt-3 p-5 w-full h-14 outline-none rounded-xl border border-solid border-[#383838] bg-transparent text-white font-ubuntuMono text-lg"/>
                         <p className="mt-2 uppercase text-xs text-[#828282] font-ubuntuMono">digite seu nick de Usuario</p>
                     </label>
 
                     <label className="mb-2 w-full min-h-min flex flex-col">
                         <h1 className="uppercase text-xl text-white font-ubuntuMono">Email:</h1>
-                        <input type="email" name="email" {...register('email')} className="p-5 w-full h-12 outline-none rounded-xl border border-solid border-[#383838] bg-transparent text-white font-ubuntuMono text-xl"/>
+                        <input type="email" name="email" {...register('email')} className="mt-3 p-5 w-full h-14 outline-none rounded-xl border border-solid border-[#383838] bg-transparent text-white font-ubuntuMono text-lg"/>
                         <p className="mt-2 uppercase text-xs text-[#828282] font-ubuntuMono">digite seu email de Usuario</p>
                     </label>
 
                     <label className="mb-2 w-full min-h-min flex flex-col">
                         <h1 className="uppercase text-xl text-white font-ubuntuMono">Password:</h1>
-                        <input type="password" name="password" {...register('password')} className="p-5 w-full h-12 outline-none rounded-xl border border-solid border-[#383838] bg-transparent text-white font-ubuntuMono text-xl"/>
+                        <input type="password" name="password" {...register('password')} className="mt-3 p-5 w-full h-14 outline-none rounded-xl border border-solid border-[#383838] bg-transparent text-white font-ubuntuMono text-lg"/>
                         <p className="mt-2 uppercase text-xs text-[#828282] font-ubuntuMono">digite sua senha</p>
                     </label>
                 </div>

@@ -9,4 +9,19 @@ const api=axios.create({
     }
 })
 
+// "authorization":`Bearer ${localStorage.getItem("token")}`
+
+api.interceptors.request.use(
+	config =>{
+		if(localStorage.getItem("token")){
+			config.headers.authorization=`Bearer ${localStorage.getItem("token")}`
+		}
+		console.log(config.headers.authorization)
+		return config
+	},
+	error=>{
+		return Promise.reject(error)
+	}
+)
+
 export default api;

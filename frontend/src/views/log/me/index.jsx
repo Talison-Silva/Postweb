@@ -1,9 +1,10 @@
+import Loading from "@/components/loading/index.jsx";
 import { useNavigate } from "react-router-dom";
 import {useState,useEffect} from 'react'
 import api from '@/hook/backend.js'
 
 function ME(){
-    const fetchUserToken=async()=>{
+    /*const fetchUserToken=async()=>{
         await api.get("/users/me").then(({data})=>{
             setResponse(data[0])
         }).catch(async(err)=>{
@@ -15,18 +16,39 @@ function ME(){
                     console.error(err)
             }
         })
+    }*/
+    const fetchUser=async()=>{
+       await api.get("/users/me").then(({data})=>{
+            setResponse(data[0])
+        }).catch(async(err)=>{
+            switch(err.response.status){
+                case 401:
+                    //navigate('/entrar?')
+                    break
+                default:
+                    console.error(err)
+            }
+        })
     }
 
-    const [response,setResponse]=useState()
+    const [loading,setLoading]=useState(true);
+    const [response,setResponse]=useState();
     const navigate=useNavigate();
 
     useEffect(()=>{
-        fetchUserToken()
+        fetchUser()
     },[])
+
+    useEffect(()=>{
+        if(response){
+            console.log(response)
+            setLoading(false)
+        }
+    },[response])
 
     return(
         <>
-            {(response) && <section className="w-full h-full flex flex-col justify-between bg-[#080808]">
+            {!(loading) && <section className="w-full h-full flex flex-col justify-between bg-[#080808]">
                 <h1 className="text-white"></h1>
                 <section className="pt-6 px-6 w-full min-h-min bg-[#080808] flex justify-center items-center gap-10">
                     <div className="relative w-28 h-28 bg-white overflow-hidden rounded-xl flex justify-center items-center">
@@ -63,6 +85,7 @@ function ME(){
                 </section>
                 <section className="w-full h-14 bg-[#080808] flex justify-center items-center"/>
             </section>}
+            {(loading) && <Loading/>}
         </>
     )
 }
