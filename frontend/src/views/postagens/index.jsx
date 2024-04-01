@@ -1,7 +1,8 @@
 //import react js
 import React from "react";
-import { useEffect,useState } from "react";
+import { useEffect,useState,useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AlertContext } from "@/contexts/alerts.js"
 
 //import backend
 import api from "@/hook/backend.js";
@@ -63,8 +64,14 @@ const Feed=()=>{
     //useStates
     const [response,setResponse]=useState()
     const [loading,setLoading]=useState(true)
+    const alert=useContext(AlertContext)
     //cookies
     //cookies.set('data',response,{path:'/'})
+
+    const x=(status)=>
+    {
+        alert({message:"message",status:status})
+    }
 
     //-------------------------------------------------------------------------------------------------------------
 
@@ -75,6 +82,9 @@ const Feed=()=>{
     //-------------------------------------------------------------------------------------------------------------
     return(
         <div className="py-28 w-full flex justify-center gap-10 flex-wrap">
+            <button onClick={()=>{x(200)}} className="text-white">200</button>
+            <button onClick={()=>{x(401)}} className="text-white">401</button>
+            <button onClick={()=>{x(500)}} className="text-white">500</button>
             {!loading &&
                 <>
                     {response?.map((postagens,index)=>{

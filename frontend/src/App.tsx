@@ -1,6 +1,10 @@
 import { BrowserRouter as Router,Routes, Route } from "react-router-dom";
-import { useState } from 'react'
+import { useState,useRef,createContext } from 'react'
 import '@/App.css'
+
+
+import Alert from "@/components/alert/index.jsx";
+import { AlertContext } from "@/contexts/alerts.js"
 
 
 // ---| VIEWS |===========================================================|
@@ -21,22 +25,52 @@ import Layouts from '@/layouts/index.jsx'
 import LoggIn from '@/layouts/loggin.jsx'
 
 function App() {
+  const [exists,setExists]=useState(null);    
+  const coldown=useRef(false)
+
+
+  let time;
+  const alert=async(values)=>
+  {
+      if(!coldown.current)
+      {
+          coldown.current=true
+          setExists(values)
+
+          time=await setTimeout(()=>
+          {
+              try
+              {
+                  setExists({})
+              }
+              finally
+              {
+                  coldown.current=false
+              }
+          }
+          ,5000);
+      }
+  }
+
   return (
     <Router>
-        <Routes>
-          <Route exact path="/" element={<Layouts><Welcome/></Layouts>} />
-          <Route exact path="/entrar?" element={<LoggIn><IN/></LoggIn>} />
-          <Route exact path="/registrar" element={<LoggIn><UP/></LoggIn>} />
-          <Route exact path="/me?" element={<LoggIn><ME/></LoggIn>}/>
+        <Alert {...exists}/>
+        <AlertContext.Provider value={alert}>
+          <Routes>
+            <Route exact path="/" element={<Layouts><Welcome/></Layouts>} />
+            <Route exact path="/entrar?" element={<LoggIn><IN/></LoggIn>} />
+            <Route exact path="/registrar" element={<LoggIn><UP/></LoggIn>} />
+            <Route exact path="/me?" element={<LoggIn><ME/></LoggIn>}/>
 
-          <Route exact path="/postagens/" element={<Layouts><Postagens/></Layouts>} />
-          <Route exact path="/postagens/c" element={<Layouts><PostagensCreated/></Layouts>} />
-          <Route exact path="/postagens/e/:id" element={<Layouts><PostagensEdit/></Layouts>} />
-          <Route exact path="/postagens/m/:id" element={<Layouts><PostagensMore/></Layouts>} />
+            <Route exact path="/postagens/" element={<Layouts><Postagens/></Layouts>} />
+            <Route exact path="/postagens/c" element={<Layouts><PostagensCreated/></Layouts>} />
+            <Route exact path="/postagens/e/:id" element={<Layouts><PostagensEdit/></Layouts>} />
+            <Route exact path="/postagens/m/:id" element={<Layouts><PostagensMore/></Layouts>} />
 
-          <Route exact path="/usuarios/" element={<Layouts><Users/></Layouts>} />
-          <Route exact path="/chat/" element={<Chat/>} />
-        </Routes>
+            <Route exact path="/usuarios/" element={<Layouts><Users/></Layouts>} />
+            <Route exact path="/chat/" element={<Chat/>} />
+          </Routes>
+        </AlertContext.Provider>
     </Router>
   )
 }

@@ -69,7 +69,7 @@ const Header=()=>{
 
     return(
       <>
-        {!loading && <header className="fixed w-full h-16" style={{backgroundColor:"rgba(7, 8, 8,.4125)"}}>
+        {!loading && <header className="w-full h-16" style={{backgroundColor:"rgba(7, 8, 8,.4125)"}}>
             <div className="px-10 w-full h-full backdrop-blur-lg">
               <div className="relative w-full h-full flex justify-around items-center">
                 <label className="flex gap-5 items-center select-none">
