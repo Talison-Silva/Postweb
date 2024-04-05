@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { Field } from "formik";
+import { Field,useField } from "formik";
+import { useEffect } from 'react';
 
 const Container=styled.div`
     position:relative;
@@ -12,7 +13,7 @@ const Container=styled.div`
     align-items:center;
 `
 
-const FieldsStyled=styled.input`
+const Fields=styled.input`
 	position:absolute;
 	top:0;left:0;
 	width:96px;
@@ -22,42 +23,70 @@ const FieldsStyled=styled.input`
 	outline-offset: 2px;
 `
 
-const Photo=({name,type="",...props})=>
+const Photo=({fileRef,change,...props})=>
 {
+	const [field ,meta,helpers]=useField(props);		
 
-	/*
-	const handleUpload=(e)=>
+	const handleUpload=(event)=>
 	{
-        let file,leitor,viewer;
-        viewer=document.getElementById('viewer')
-        file=e.target.files[0]
+		const viewer=document.getElementById('viewer')
+		const file = event.currentTarget.files[0];
 
-        if(file){
-            leitor=new FileReader()
-            leitor.onload =(e)=>{
+		if(file)
+		{
+			//helpers.setValue(fileRef.current.value)
+			change(file)
+
+
+        	let leitor=new FileReader()
+            leitor.onload =(e)=>
+            {
                 viewer.src = e.target.result;
             }
 
-            leitor.readAsDataURL(file)
+            leitor.readAsDataURL(file)            
         }
+        /*let file,leitor,viewer;
+        viewer=document.getElementById('viewer')
+        file=new File(['foo'],entry)
+        console.log(new File(['foo'],entry))
+
+        if(file){
+        	leitor=new FileReader()
+            leitor.onload =(e)=>
+            {
+                viewer.src = e.target.result;
+            }
+
+            leitor.readAsDataURL(file)            
+        }
+
+        helpers.setValue(file);
+
+		const reader = new FileReader();
+		reader.onload = () => {
+			helpers.setTouched(true);
+			helpers.setTouched(true);
+			helpers.setValue(reader.result);
+		};
+		reader.readAsDataURL(file);
+
+        */
     }
+    /*.test("is-file-too-big", "File exceeds 10MB",()=>{
+        console.log("==>",file.current.value)
+    })     
     */
-    const test=(e)=>
-    {
-    	console.log(e.target.files)
-    }
 
 	return(
 		<Container>
 			<img id='viewer'/>
-			{/*<input className="
-				absolute top-0 left-0 w-24 h-24 opacity-0
-			"
-				name={name} 
+			{<Fields
+				ref={fileRef}
 				type="file"
+				{...field}
 				onChange={handleUpload}
-			/>*/}
-			<Field as={FieldsStyled} name={name} type={type} {...props} onChange={test}/>
+			/>}
 		</Container>
 	)
 }

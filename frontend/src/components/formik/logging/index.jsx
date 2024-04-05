@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import {Field, ErrorMessage } from "formik";
-
+import {Field,useField, ErrorMessage } from "formik";
+import {useState,useEffect} from 'react';
 
 const Container=styled.div`
 	width:100%;display:flex;
@@ -24,6 +24,7 @@ const FieldsStyled=styled.input`
 
 const Label=styled.label`
 	text-transform: uppercase;
+	letter-spacing: 1.75px;
 	color:white;
 	font-family:'Ubuntu mono',monospace;
 	font-size:20px;
@@ -41,15 +42,37 @@ const ErrorStyled=styled.span`
 	font-family:'Ubuntu mono',monospace;
 `
 
-function Input({name,type="",label,required,...props}){
+const Little=styled.span`
+	color: #444d4d;
+	font-size:12px;
+	letter-spacing: 1.25px;
+	text-transform: uppercase;
+	font-family:'Ubuntu mono',monospace;
+`
+
+function Input({name,type="",label,cookie,required,...props}){
+	const [err,setErr]=useState(false);
+	const [fields,meta]=useField(name)
+
+	useEffect(()=>{				
+		meta.error?setErr(true):setErr(false);
+	},[meta.error])
+
+	if(cookie)
+	{
+		useEffect(()=>{
+			cookie(name,fields.value,{path:`/postagens/`,'maxAge':10000})
+		},[fields.value])
+	}
 	return(
 		<Container>
 			<Label>
-				{label || name}
+				{name}
 				{required && <Focus> *</Focus>}
 			</Label>
 			<Field as={FieldsStyled} name={name} type={type} {...props}/>
 			<ErrorMessage name={name} component={ErrorStyled} />
+			{(!err && label) && <Little>{label}</Little>}
 		</Container>
 	)
 }

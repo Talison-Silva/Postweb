@@ -40,7 +40,7 @@ const LerMais=()=>{
         <main>
             {!loading &&
                 <section style={{
-                    width: '800px',
+                    width: '1000px',
                     minHeight:'400px'
                 }} class="relative rounded-3xl overflow-hidden bg-[#0b0d0d] border-2 border-solid border-[#141717] flex justify-center items-center">
                     <p className="text-white font-ubuntu">{lermais}</p>
