@@ -11,7 +11,6 @@ import {Formik,Form} from 'formik';
 import * as Yup from 'yup';
 
 
-// w-full h-full flex flex-col justify-between
 const Container=styled.section`
     width: 100%;
     height: 100%;
@@ -52,21 +51,17 @@ const Submit=styled.button`
 `
 
 
-function UP(){
-    const {register,handleSubmit}=useForm()
-    const [visibility,setVisibility]=useState(true);
-    const [status,setStatus]=useState(undefined)
-    const navigate= useNavigate();
-    const validationSchema=Yup.object({
-        username:Yup.string().required('este campo é obrigatório'),
-        email:Yup.string().email('o email deve conter um @exemple.com').required('este campo é obrigatório'),
-        password:Yup.string().required('este campo é obrigatório'),
-        me:Yup.string().required('este campo é obrigatório')        
-    })
-    const file= useRef(null);
-    const [filei,setFilei]=useState(null);
+const validationSchema=Yup.object({
+    username:Yup.string().required('este campo é obrigatório'),
+    email:Yup.string().email('o email deve conter um @exemple.com').required('este campo é obrigatório'),
+    password:Yup.string().required('este campo é obrigatório'),
+    me:Yup.string().required('este campo é obrigatório')        
+})
 
-    const handlesubmit=async(values,{setSubmitting})=>
+
+function UP(){
+
+    const submit=async(values,{setSubmitting})=>
     {
         try
         {
@@ -74,48 +69,53 @@ function UP(){
         }
         catch(err)
         {
-            console.log(err)
-        }
-        finally
-        {
-            console.log(response)
+            console.error(err)
         }
 
         setSubmitting(false)
     }
 
+
+    const [visibility,setVisibility]=useState(true);
+    const [status,setStatus]=useState(undefined);
+    const {register,handleSubmit}=useForm();
+    const [filei,setFilei]=useState(null);
+    const navigate= useNavigate();
+    const file= useRef(null);
+
+
     return(
         <Container>
-                <Formik
-                    onSubmit={handlesubmit}
-                    initialValues={{
-                        username:'',
-                        email:'',
-                        password:'',
-                        me:'',
-                        photo:''
-                    }}
-                    validationSchema={validationSchema}
-                >
-                    {(value,isSubmitting)=>(
-                        <Form className="w-full h-full flex flex-col gap-5">
-                            <Rows>
-                                <Photo fileRef={file} name="photo" change={(file2)=>{
-                                    setFilei(file2)
-                                }}/>
-                                <Input name="username" required/>
-                            </Rows>
-                            
-                            <Input name="email" required/>
-                            <Input name="password" type="password" required/>
-                            <Description name="me" required/>
-                            
-                            <Submit
-                                    type="submit"
-                            >Criar Usuario</Submit>
-                        </Form>
-                    )}
-                </Formik>
+            <Formik
+                onSubmit={submit}
+                initialValues={{
+                    username:'',
+                    email:'',
+                    password:'',
+                    me:'',
+                    photo:''
+                }}
+                validationSchema={validationSchema}
+            >
+                {(value,isSubmitting)=>(
+                    <Form className="w-full h-full flex flex-col gap-5">
+                        <Rows>
+                            <Photo fileRef={file} name="photo" change={(file2)=>{
+                                setFilei(file2)
+                            }}/>
+                            <Input name="username" required/>
+                        </Rows>
+                        
+                        <Input name="email" required/>
+                        <Input name="password" type="password" required/>
+                        <Description name="me" required/>
+                        
+                        <Submit
+                                type="submit"
+                        >Criar Usuario</Submit>
+                    </Form>
+                )}
+            </Formik>
         </Container>
     )
 }

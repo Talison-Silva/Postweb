@@ -1,54 +1,67 @@
-import React,{useEffect,useState} from "react";
-//backend
-import api from "@/hook/backend";
-//import loading
 import Loading from "@/components/loading/index.jsx";
-//router
+import React,{useEffect,useState} from "react";
 import { useParams } from "react-router-dom";
-//import stylings
 import '@/styles/pages/lermais/style.scss';
+import styled from 'styled-components';
+import api from "@/hook/backend";
 
 
-const LerMais=()=>{
-    //FUNÇÕES---------------------------------------------------------------------------------------------
+const Container=styled.section`
+    position:relative;
+    width: 1000px;
+    min-height: 400px;
+    overflow:hidden;
+    background-color:#0b0d0d;
+    border: 4px solid #141717;
+    color:white;
+    border-radius:24px;
 
-    const Data=async()=>{
-        await api.get(`/application/?filter={"id":${id}}`).then((response)=>{
-            console.log(response)
-            setLermais(response.data[0].content)
-        }).catch((error)=>console.log(error))
+    display:flex;
+    justify-content:center;
+    align-items:center;
+`
 
+
+const More=()=>{
+
+    const fetchMore=async()=>
+    {
+        try
+        {
+            const {data}=await api.get(`/application/?filter={"id":${id}}`)
+            setLermais(data[0].content)
+        }
+        catch(err)
+        {
+            console.error(err)
+        }
         setLoading(false)
     }
 
-    //DEFINIÇÕES------------------------------------------------------------------------------------------
 
-    const [lermais,setLermais]=useState()
     const [loading,setLoading]=useState(true)
+    const [lermais,setLermais]=useState()
     const {id}=useParams()
 
-    //----------------------------------------------------------------------------------------------------
 
-    //userEffect
     useEffect(()=>{
-        Data()
+        fetchMore()
     },[])
-    console.log(lermais)
 
-    //----------------------------------------------------------------------------------------------------
     return(
-        <main>
-            {!loading &&
-                <section style={{
-                    width: '1000px',
-                    minHeight:'400px'
-                }} class="relative rounded-3xl overflow-hidden bg-[#0b0d0d] border-2 border-solid border-[#141717] flex justify-center items-center">
-                    <p className="text-white font-ubuntu">{lermais}</p>
-                </section>
-            }
-            {loading && <Loading/>}
-        </main>
+        <>
+        {
+            !loading &&
+            <Container>
+                <p>{lermais}</p>
+            </Container>
+        }
+        {
+            loading && 
+            <Loading/>
+        }
+        </>
     );
 }
 
-export default LerMais;
+export default More;

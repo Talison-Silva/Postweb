@@ -76,10 +76,10 @@ const Label=styled.label`
 	text-transform:uppercase;
 `
 
-const Editor=({name,cookie,...props})=>
+const Editor=({name,id,cookie,...props})=>
 {
-	const [content,setContent]=useState("");
 	const [field,meta,helpers]=useField(name)
+	const [content,setContent]=useState(field.value);
 
 	useEffect(()=>{
 		helpers.setValue(content)
@@ -88,7 +88,15 @@ const Editor=({name,cookie,...props})=>
 	if(cookie)
 	{
 		useEffect(()=>{
-			cookie(name,field.value,{path:`/postagens/`,'maxAge':10000})
+			if(id)
+			{
+				console.log(`${name}${id}`)
+				cookie(`${name}${id}`,field.value,{path:`/postagens/`,'maxAge':10000})
+			}
+			else 
+			{
+				cookie(name,field.value,{path:`/postagens/`,'maxAge':10000})
+			}
 		},[field.value])
 	}
 
@@ -101,7 +109,7 @@ const Editor=({name,cookie,...props})=>
 			<Workspace>
 				<Global/>				
 				<Viewer render={content}/>
-				<Marked emit={setContent}/>
+				<Marked initial={field.value} emit={setContent}/>
 			</Workspace>
 		</Container>
 	)

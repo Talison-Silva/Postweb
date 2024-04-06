@@ -11,21 +11,65 @@ import Loading from "@/components/loading/index.jsx";
 
 //backend connection
 import api from "@/hook/backend.js";
-
 import {useCookies} from 'react-cookie';
 
-import './index.scss'
+import styled from 'styled-components';
+
+import Historic from '@/components/historic/index.jsx';
+import { Formik ,Form } from 'formik';
+
+import Input from '@/components/formik/logging/index.jsx'
+import Editor from '@/components/formik/editor/index.jsx'
+import Photography from '@/components/formik/photography/index.jsx'
+
+const Container=styled.section`
+    position:relative;
+    min-width:800px;height:680px;
+    overflow:hidden;
+    background-color:#0b0d0d;
+    border: 4px solid #141717;
+    display:flex;
+    border-radius:20px;
+`
+
+const Sections=styled.div`
+    min-width:500px;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+`
+
+const Right=styled.div`
+    min-width: 500px;
+    height:100%;
+    background-color:#090a0a;
+    display:flex;
+`
+
+const Button=styled.button`
+    color:white;
+    font-family:'Ubuntu mono',monospace;
+    text-transform:uppercase;
+`
+
+const Submit=styled.div`
+    width:100%;
+    height:52px;
+    background-color:#101212;
+    border-radius:0 0 20px 20px;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+`
 
 const Edit=()=>{
-    //FUNÇÕES------------------------------------------------------------------------------------
-
-    const SubmitForm=async(data)=>{
-
-        await api.put('/application/',{
-            id:id,
-            ...data
-        }).then((response)=>{
-            switch(response.status){
+    const submit=async(data)=>
+    {
+        try
+        {
+            const {status}= await api.put('/application/',{id,...data})
+            switch(status){
                 case 200:
                     console.log(200)
                     break;
@@ -35,202 +79,111 @@ const Edit=()=>{
                 default:
                     console.log('???')
             }
-        }).catch((error)=>{
-            console.log(error)
-        })
-        //------------------------------------------
-
-        //desviar a rota devolta para o feed :)
-        navigate('/postagens/');
+            navigate('/postagens/');
+        }
+        catch(err)
+        {
+            console.error(err)
+        }
     }
 
-    const Data=async()=>{
-        await api.get(`/application/?filter={"id":${id}}`).then((response)=>{
-            setEditor(response.data[0])
-        }).catch((error)=>console.log(error));
 
-        setTimeout(()=>{
+    const fetchPostagem=async()=>
+    {
+        try
+        {
+            const {data}=await api.get(`/application/?filter={"id":${id}}`)
+            setInitial
+            (
+                {
+                    description:data[0].description,
+                    content:data[0].content,
+                    title:data[0].title,
+                }
+            );
+        }
+        catch(err)
+        {
+            console.error(err)
+        }
+
+        setTimeout(()=>
+        {
             setLoading(false)
-        },1000)
+        }
+        ,1000)
     }
 
-    const executor=(callback)=>{
-        return(callback())
-    }
 
-    const clipcopy=(key)=>{
-        navigator.clipboard.writeText(editor[key]);
-    }
-
-    //DEFINIÇÕES----------------------------------------------------------------------------------
-
-    //params
-    const {id}=useParams()
-    //useForm
-    const {register,handleSubmit}=useForm()
-    //state
-    const [loading,setLoading]=useState(true)
-    const [editor,setEditor]=useState({title:'',description:'',content:''})
-    //useNavigate
-    const navigate=useNavigate()
-
+    const [initial,setInitial]=useState({title:'helo',description:'helo',content:'helo'})
     const [cookies,setCookies,removeCookies]= useCookies([`postagens-edit`]);
+    const [loading,setLoading]=useState(true)
+    const {register,handleSubmit}=useForm()
+    const navigate=useNavigate()
+    const {id}=useParams()
 
-    //--------------------------------------------------------------------------------------------
 
-    //userEffect
     useEffect(()=>{
-        Data()
+        fetchPostagem()
     },[])
 
-    //--------------------------------------------------------------------------------------------
     return (
         <>
-            {!loading &&
-                <>
-                    <section style={{
-                        width: '800px',
-                        minHeight:'400px',
-                        display:'grid',
-                        gridTemplateColumns:'40% 60%'
-                    }} class="relative rounded-3xl overflow-hidden bg-[#0b0d0d] border-2 border-solid border-[#141717]">
-                        <article class="p-6 relative w-full h-full bg-[#0b0d0d] flex flex-col justify-between items-center text-white">
-                            <h1 className="select-none text-white font-ubuntuMono text-4xl uppercase">cookies</h1>
-
-                            <p                                
-                                className="
-                                    scroll-hidden
-                                    w-full h-14
-                                    bg-transparent 
-                                    border-2 border-[#161a1a] border-solid 
-                                    p-3 
-                                    overflow-x-auto
-                                    overflow-y-hidden
-                                    outline-none 
-                                    rounded-xl                                     
-                                    font-ubuntuMono
-                                "                             
-                            >{cookies[`title${id}`]}</p>
-                            <p 
-                                className="
-                                    scroll-hidden
-                                    w-full h-14 
-                                    bg-transparent 
-                                    border-2 border-[#161a1a] border-solid 
-                                    p-3 
-                                    overflow-x-auto
-                                    overflow-y-hidden
-                                    outline-none 
-                                    rounded-xl 
-                                    font-ubuntuMono
-                                " 
-                            >{cookies[`description${id}`]}</p>                            
-                            <div           
-                                style={{
-                                    width:'270.85px',
-                                    height:'192px',
-                                    whiteSpace: 'wrap',
-                                    wordWrap: 'break-word'
-                                }}                     
-                                className="
-                                    scroll-hidden                
-                                    bg-transparent 
-                                    border-2 border-[#161a1a] border-solid
-                                    p-3 
-                                    overflow-x-hidden
-                                    overflow-y-auto
-                                    outline-none                                     
-                                    rounded-xl 
-                                    font-ubuntuMono 
-                                " 
-                            >
-                                {cookies[`content${id}`]}
-                            </div>
-
-                            <p className="select-none text-white font-ubuntuMono text-xs opacity-40">estava escrevendo e do nada algo ocorreu?<br/>não se preocupe aqui ficam seus registros</p>
-                        </article>
-                        <form class="w-full h-full flex flex-col justify-between" onSubmit={handleSubmit(SubmitForm)}>
-                            <div className="w-full h-full bg-[#090a0a] p-8">
-                                <div className="flex flex-col gap-6">
-                                    <label className="text-white">
-                                        <h1 className="select-none ml-3 mb-1.5 font-ubuntuMono uppercase">titulo:</h1>
-                                        <input className="w-96 bg-transparent border-2 border-[#161a1a] border-solid p-3 outline-none rounded-xl font-ubuntuMono" type="text" name="title" {...register('title')} placeholder="titulo..." value={editor.title} onChange={async(input)=>{
-                                            await setEditor({title:input.target.value})
-                                            setCookies(`title${id}`,input.target.value,{path:`/postagens/`,'maxAge':10000})
-                                        }} />
-                                        <p className="select-none ml-3 mt-1.5 font-ubuntuMono text-xs text-[#474a4a]">adicione o titulo da postagem</p>
-                                    </label>
-
-                                    <label className="text-white">
-                                        <h1 className="select-none ml-3 mb-1.5 font-ubuntuMono uppercase">descrisão:</h1>
-                                        <input className="w-96 bg-transparent border-2 border-[#161a1a] border-solid p-3 outline-none rounded-xl font-ubuntuMono" type="text" name="description" {...register('description')} placeholder="descricao..." value={editor.description} onChange={async(input)=>{
-                                            await setEditor({description:input.target.value})                                    
-                                            setCookies(`description${id}`,input.target.value,{path:`/postagens/`,'maxAge':10000})
-                                        }} />
-                                        <p className="select-none ml-3 mt-1.5 font-ubuntuMono text-xs text-[#474a4a]">descreva o conteudo da postagem</p>
-                                    </label>
-
-                                    <label className="text-white">
-                                        <h1 className="select-none ml-3 mb-1.5 font-ubuntuMono uppercase">inserir o conteudo da Postagem: </h1>
-                                        <textarea className="scroll-hidden w-96 h-48 bg-transparent border-2 border-[#161a1a] border-solid p-3 outline-none rounded-xl font-ubuntuMono resize-none" type="text" name="content" {...register('content')} value={editor.content} onChange={(input)=>{
-                                            setEditor({content:input.target.value})
-                                            setCookies(`content${id}`,input.target.value,{path:`/postagens/`,'maxAge':10000})
-                                        }}/>
-                                        <p className="select-none ml-3 mt-1.5 font-ubuntuMono text-xs text-[#474a4a]">conte-nos mais</p>
-                                    </label>
-                                </div>
-                            </div>
-                            <div className="w-full h-12 rounded-bl-3xl overflow-hidden flex justify-between items-center">
-                                <button type="button" onClick={()=>{
-                                    navigate('/postagens/')
-                                }} class="w-full h-full bg-[#101212] uppercase font-ubuntuMono text-white tracking-wide select-none">Voltar</button>
-
-                                <button type="submit" class="w-full h-full bg-[#101212] uppercase font-ubuntuMono text-white tracking-wide select-none">Editar</button>
-                            </div>
-                        </form>
-                    </section>
-                </>}
-            {loading && <Loading/>}
-
+        {
+            !loading &&
+            <>
+                <Container>
+                    <Historic schema={
+                        [{
+                            name:'title',
+                            type:'text',
+                            value:cookies[`title${id}`]
+                        },{
+                            name:'description',
+                            type:'text',
+                            value:cookies[`description${id}`]
+                        },{
+                            name:'content',
+                            type:'textarea',
+                            value:cookies[`content${id}`]
+                        }]
+                    } />                    
+                    <Formik
+                        onSubmit={submit}
+                        initialValues={initial}
+                    >
+                        {({setFieldValue,values})=>(
+                            <Form className="min-w-min min-h-min flex flex-col justify-between">
+                                <Right>
+                                    <Sections className="p-5">
+                                        <Input name="title" id={id} cookie={setCookies} label="digite o titulo adequado para o conteudo com a postagem"/>
+                                        <Input name="description" id={id} cookie={setCookies} label="faça uma breve descrisão do conteudo da postagem"/>
+                                        <Photography name="photography" set={setFieldValue}/>
+                                    </Sections>
+                                    <Sections>
+                                        <Editor name="content" id={id} cookie={setCookies}/>
+                                    </Sections>
+                                </Right>
+                                <Submit>
+                                    <Button onClick={()=>
+                                        {
+                                            navigate('/postagens/')
+                                        }
+                                    }>voltar</Button>
+                                    <Button type="submit">editar</Button>
+                                </Submit>
+                            </Form>
+                        )}
+                    </Formik>
+                </Container>
+            </>
+        }
+        {
+            loading && 
+            <Loading/>
+        }
         </>
     );
 }
-/*
- * <form onSubmit={handleSubmit(SubmitForm)}>
-                        <h1>Editar Postagem</h1>
-
-                        <section>
-                            <div>
-                                <label className="titulo">
-                                    <p>inserir o titulo da Postagem: </p>
-                                    <input type="text" name="title" {...register('title')} value={editor.title} onChange={(input)=>{
-                                        setEditor({title:input.target.value})
-                                    }} />
-                                </label>
-                            </div>
-
-                            <div>
-                                <label className="descricao">
-                                    <p>inserir a descricao da Postagem: </p>
-                                    <input type="text" name="description" {...register('description')} value={editor.description} onChange={(input)=>{
-                                        setEditor({description:input.target.value})
-                                    }}/>
-                                </label>
-                            </div>
-
-                            <div>
-                                <label className="conteudo">
-                                    <p>inserir o conteudo da Postagem: </p>
-                                    <textarea type="text" name="content" {...register('content')} value={editor.content} onChange={(input)=>{
-                                        setEditor({content:input.target.value})
-                                    }}/>
-                                </label>
-                            </div>
-                        </section>
-
-                        <button type="submit">Editar Postagem</button>
-                    </form>
-*/
-
 
 export default Edit;

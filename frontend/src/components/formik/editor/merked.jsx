@@ -18,7 +18,7 @@ const Textarea=styled.textarea`
 	outline-offset: 2px;
 `
 
-const Marked=({emit,...props})=>
+const Marked=({emit,initial="",...props})=>
 {
 	const change=(e)=>
 	{
@@ -26,7 +26,7 @@ const Marked=({emit,...props})=>
 	}
 	return(
 		<Container>			
-			<Textarea onChange={change}/>
+			<Textarea defaultValue={initial} onChange={change}/>
 		</Container>
 	)
 }

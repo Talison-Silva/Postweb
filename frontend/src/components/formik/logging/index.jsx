@@ -50,7 +50,7 @@ const Little=styled.span`
 	font-family:'Ubuntu mono',monospace;
 `
 
-function Input({name,type="",label,cookie,required,...props}){
+function Input({name,type="",id,label,cookie,required,...props}){
 	const [err,setErr]=useState(false);
 	const [fields,meta]=useField(name)
 
@@ -61,7 +61,14 @@ function Input({name,type="",label,cookie,required,...props}){
 	if(cookie)
 	{
 		useEffect(()=>{
-			cookie(name,fields.value,{path:`/postagens/`,'maxAge':10000})
+			if(id)
+			{
+				cookie(`${name}${id}`,fields.value,{path:`/postagens/`,'maxAge':10000})
+			}	
+			else
+			{
+				cookie(name,fields.value,{path:`/postagens/`,'maxAge':10000})
+			}	
 		},[fields.value])
 	}
 	return(
