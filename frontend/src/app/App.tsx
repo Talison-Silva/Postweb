@@ -1,26 +1,30 @@
 import { BrowserRouter as Router,Routes, Route } from "react-router-dom";
-import { useState,useRef,createContext } from 'react'
-
-
-import Alert from "@/ui/components/alert/index.jsx";
 import { AlertContext } from "@/app/contexts/alerts.js"
+import { useState,useRef,createContext } from 'react'
+import Alert from "@/ui/components/alert/index.jsx";
 
 
-// ---| VIEWS |===========================================================|
-import Welcome from '@/pages/welcome/index.jsx'
+// ---| Postagens |--------------------------------------------------------
 import Users from '@/pages/users/index.jsx'
-
 import Postagens from '@/pages/postagens/index.jsx'
 import PostagensMore from '@/pages/postagens/actions/more/index.jsx'
 import PostagensEdit from '@/pages/postagens/actions/edit/index.jsx'
 import PostagensCreated from '@/pages/postagens/actions/created/index.jsx'
-import IN from '@/pages/log/in/index.jsx';
-import UP from '@/pages/log/up/index.jsx';
-import ME from '@/pages/log/me/index.jsx';
-// ---|===================================================================|
+// ---||-------------------------------------------------------------------
 
-import Layouts from '@/ui/layouts/index.jsx'
-import LoggIn from '@/ui/layouts/loggin.jsx'
+
+// ---| Authentication |---------------------------------------------------
+import Authorization from '@/pages/authentication/authorization/index.jsx';
+import createUser from '@/pages/authentication/createUser/index.jsx';
+import Badge from '@/pages/authentication/badge/index.jsx';
+// ---||-------------------------------------------------------------------
+
+
+// ---| Layouts |----------------------------------------------------------
+import Authentication from '@/ui/layouts/authentication.jsx'
+import Home from '@/ui/layouts/home.jsx'
+// ---||-------------------------------------------------------------------
+
 
 function App() {
   const [exists,setExists]=useState(null);    
@@ -55,17 +59,17 @@ function App() {
         <Alert {...exists}/>
         <AlertContext.Provider value={alert}>
           <Routes>
-            <Route exact path="/" element={<Layouts><Welcome/></Layouts>} />
-            <Route exact path="/entrar?" element={<LoggIn><IN/></LoggIn>} />
-            <Route exact path="/registrar" element={<LoggIn><UP/></LoggIn>} />
-            <Route exact path="/me?" element={<LoggIn><ME/></LoggIn>}/>
+            <Route exact path="/" element={<Home></Home>} />
+            <Route exact path="/entrar?" element={<Authorization><Authorization/></Authorization>} />
+            <Route exact path="/registrar" element={<Authorization><createUser/></Authorization>} />
+            <Route exact path="/me?" element={<Authorization><Badge/></Authorization>}/>
 
-            <Route exact path="/postagens/" element={<Layouts><Postagens/></Layouts>} />
-            <Route exact path="/postagens/c" element={<Layouts><PostagensCreated/></Layouts>} />
-            <Route exact path="/postagens/e/:id" element={<Layouts><PostagensEdit/></Layouts>} />
-            <Route exact path="/postagens/m/:id" element={<Layouts><PostagensMore/></Layouts>} />
+            <Route exact path="/postagens/" element={<Home><Postagens/></Home>} />
+            <Route exact path="/postagens/c" element={<Home><PostagensCreated/></Home>} />
+            <Route exact path="/postagens/e/:id" element={<Home><PostagensEdit/></Home>} />
+            <Route exact path="/postagens/m/:id" element={<Home><PostagensMore/></Home>} />
 
-            <Route exact path="/usuarios/" element={<Layouts><Users/></Layouts>} />          
+            <Route exact path="/usuarios/" element={<Home><Users/></Home>} />          
           </Routes>
         </AlertContext.Provider>
     </Router>

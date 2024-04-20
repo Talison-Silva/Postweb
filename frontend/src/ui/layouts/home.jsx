@@ -1,5 +1,5 @@
-import Header from '@/ui/components/core/header/index.jsx'
-import Footer from '@/ui/components/core/footer/index.jsx'
+import Header from '@/ui/partials/header/index.jsx'
+import Footer from '@/ui/partials/footer/index.jsx'
 import styled from 'styled-components'
 import { useState,useRef,useEffect } from 'react'
 
@@ -15,8 +15,8 @@ const Content=styled.section`
 
 const Root=styled.main`
 	min-height: 100vh;
-	display: flex;
-	flex-direction: columns;
+	display: flex;    
+	flex-direction: column;
 	justify-content: space-between;
 `
 const HighContent=styled.div`
