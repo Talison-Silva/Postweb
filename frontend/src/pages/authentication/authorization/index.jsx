@@ -2,11 +2,11 @@ import { useNavigate } from "react-router-dom";
 import {useForm} from 'react-hook-form';
 import api from '@/app/hook/backend.js'
 import {useState,useRef} from 'react'
-import Input from "@/ui/components/formik/logging/index.jsx"
+import Input from "@/UI/components/formik/input/index.jsx"
 import {Formik,Form} from "formik";
 import styled from "styled-components";
 import * as Yup from "yup";
-import State from '@/ui/components/state/index.jsx'
+import State from '@/UI/components/authorization-state/index.jsx'
 
 
 const Submit=styled.button`
@@ -57,7 +57,7 @@ const validationSchema=Yup.object({
 })
 
 
-const IN=()=>
+const Authorization=()=>
 {
     const submit=async(value,{setSubmitting})=>
     {
@@ -117,4 +117,4 @@ const IN=()=>
 }
 
 
-export default IN;
+export default Authorization;

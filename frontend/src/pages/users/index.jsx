@@ -1,6 +1,7 @@
 import {dateComplete} from '@/app/utils/DateComplete/index.js';
-import Users from '@/ui/components/items/users/index.jsx';
-import Loading from "@/ui/components/loading/index.jsx";
+import Users from '@/UI/partials/container-items/user-item.tsx';
+//import Users from '@/UI/components/items/users/index.jsx';
+import Loading from "@/UI/components/loading/index.jsx";
 import { useNavigate } from "react-router-dom";
 import {useEffect,useRef,useState} from "react";
 import styled from 'styled-components';

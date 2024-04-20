@@ -1,5 +1,5 @@
-import Header from '@/ui/partials/header/index.jsx'
-import Footer from '@/ui/partials/footer/index.jsx'
+import Header from '@/UI/partials/header/index.jsx'
+import Footer from '@/UI/partials/footer/index.jsx'
 import styled from 'styled-components'
 import { useState,useRef,useEffect } from 'react'
 

@@ -1,6 +1,7 @@
-import Postagens from '@/ui/components/tables/postagens/index.jsx';
+//import Postagens from '@/UI/components/tables/postagens/index.jsx';
+import Postagens from '@/UI/partials/container-items/postagem-item.tsx';
 import { useEffect,useState,useContext } from "react";
-import Loading from "@/ui/components/loading/index.jsx";
+import Loading from "@/UI/components/loading/index.jsx";
 import { AlertContext } from "@/app/contexts/alerts.js"
 import { useNavigate } from "react-router-dom";
 import styled from 'styled-components';

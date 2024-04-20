@@ -2,12 +2,12 @@ import React from "react";
 import {Link} from 'react-router-dom';
 
 import { useNavigate } from "react-router-dom";
-import Navigate from "@/ui/partials/navigate/index.jsx";
+import Navigate from "@/UI/partials/navigate/index.jsx";
 import api from "@/app/hook/backend.js";
 import { useEffect,useState } from "react";
 
 //import loading
-import Loading from "@/ui/components/loading/index.jsx";
+import Loading from "@/UI/components/loading/index.jsx";
 import "./s.css";
 
 const Header=()=>{

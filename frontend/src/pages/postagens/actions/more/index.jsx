@@ -1,4 +1,4 @@
-import Loading from "@/ui/components/loading/index.jsx";
+import Loading from "@/UI/components/loading/index.jsx";
 import React,{useEffect,useState} from "react";
 import { useParams } from "react-router-dom";
 import styled from 'styled-components';

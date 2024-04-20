@@ -1,7 +1,7 @@
 import { BrowserRouter as Router,Routes, Route } from "react-router-dom";
 import { AlertContext } from "@/app/contexts/alerts.js"
 import { useState,useRef,createContext } from 'react'
-import Alert from "@/ui/components/alert/index.jsx";
+import Alert from "@/UI/components/application-message/index.jsx";
 
 
 // ---| Postagens |--------------------------------------------------------
@@ -15,14 +15,14 @@ import PostagensCreated from '@/pages/postagens/actions/created/index.jsx'
 
 // ---| Authentication |---------------------------------------------------
 import Authorization from '@/pages/authentication/authorization/index.jsx';
-import createUser from '@/pages/authentication/createUser/index.jsx';
+import CreateUser from '@/pages/authentication/createUser/index.jsx';
 import Badge from '@/pages/authentication/badge/index.jsx';
 // ---||-------------------------------------------------------------------
 
 
 // ---| Layouts |----------------------------------------------------------
-import Authentication from '@/ui/layouts/authentication.jsx'
-import Home from '@/ui/layouts/home.jsx'
+import Authentication from '@/UI/layouts/authentication.jsx'
+import Home from '@/UI/layouts/home.jsx'
 // ---||-------------------------------------------------------------------
 
 
@@ -60,9 +60,9 @@ function App() {
         <AlertContext.Provider value={alert}>
           <Routes>
             <Route exact path="/" element={<Home></Home>} />
-            <Route exact path="/entrar?" element={<Authorization><Authorization/></Authorization>} />
-            <Route exact path="/registrar" element={<Authorization><createUser/></Authorization>} />
-            <Route exact path="/me?" element={<Authorization><Badge/></Authorization>}/>
+            <Route exact path="/entrar?" element={<Authentication><Authorization/></Authentication>} />
+            <Route exact path="/registrar" element={<Authentication><CreateUser/></Authentication>} />
+            <Route exact path="/me?" element={<Authentication><Badge/></Authentication>}/>
 
             <Route exact path="/postagens/" element={<Home><Postagens/></Home>} />
             <Route exact path="/postagens/c" element={<Home><PostagensCreated/></Home>} />

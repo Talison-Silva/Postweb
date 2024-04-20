@@ -4,9 +4,9 @@ import api from '@/app/hook/backend.js'
 import {useState,useRef} from 'react';
 import styled from 'styled-components';
 
-import Input from '@/ui/components/formik/logging/index.jsx';
-import Photo from '@/ui/components/formik/photo/index.jsx';
-import Description from '@/ui/components/formik/description/index.jsx';
+import Input from '@/UI/components/formik/input/index.jsx';
+import Photo from '@/UI/components/formik/photo/index.jsx';
+import Description from '@/UI/components/formik/description/index.jsx';
 import {Formik,Form} from 'formik';
 import * as Yup from 'yup';
 
@@ -59,7 +59,7 @@ const validationSchema=Yup.object({
 })
 
 
-function UP(){
+function createUser(){
 
     const submit=async(values,{setSubmitting})=>
     {
@@ -120,4 +120,4 @@ function UP(){
     )
 }
 
-export default UP;
+export default createUser;

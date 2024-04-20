@@ -1,11 +1,11 @@
-import Loading from "@/ui/components/loading/index.jsx";
+import Loading from "@/UI/components/loading/index.jsx";
 import { useNavigate } from "react-router-dom";
 import {useState,useEffect} from 'react'
 import api from '@/app/hook/backend.js'
 import styled from "styled-components";
-import Input from "@/ui/components/show/input/index.jsx";
-import Description from "@/ui/components/show/description/index.jsx";
-import Photo from "@/ui/components/show/photo/index.jsx";
+import Input from "@/UI/components/show/input/index.jsx";
+import Description from "@/UI/components/show/description/index.jsx";
+import Photo from "@/UI/components/show/photo/index.jsx";
 
 
 const Container=styled.section`
@@ -38,7 +38,7 @@ const Columns=styled.div`
 `
 
 
-const ME=()=>
+const Badge=()=>
 {
     const fetchUser=async()=>
     {       
@@ -102,4 +102,4 @@ const ME=()=>
 }
 
 
-export default ME;
+export default Badge;

@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 import {useForm} from 'react-hook-form';
 
 //import loading
-import Loading from "@/ui/components/loading/index.jsx";
+import Loading from "@/UI/components/loading/index.jsx";
 
 //backend connection
 import api from "@/app/hook/backend.js";
@@ -15,12 +15,12 @@ import {useCookies} from 'react-cookie';
 
 import styled from 'styled-components';
 
-import Historic from '@/ui/components/historic/index.jsx';
+import Historic from '@/UI/components/historic/index.jsx';
 import { Formik ,Form } from 'formik';
 
-import Input from '@/ui/components/formik/logging/index.jsx'
-import Editor from '@/ui/components/formik/editor/index.jsx'
-import Photography from '@/ui/components/formik/photography/index.jsx'
+import Input from '@/UI/components/formik/input/index.jsx'
+import Editor from '@/UI/components/formik/editor/index.jsx'
+import Photography from '@/UI/components/formik/photography/index.jsx'
 
 const Container=styled.section`
     position:relative;
