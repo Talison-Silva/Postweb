@@ -39,10 +39,6 @@ const Global=createGlobalStyle`
 	li{
 		padding:0 0 0 20px;		
 	}
-
-	img{
-		margin-top: 20px;
-	}
 `
 
 const Container=styled.div`
@@ -107,7 +103,7 @@ const Editor=({name,id,cookie,...props})=>
 				<Label>Editor</Label>
 			</Legend>
 			<Workspace>
-				<Global/>				
+				<Global/>
 				<Viewer render={content}/>
 				<Marked initial={field.value} emit={setContent}/>
 			</Workspace>

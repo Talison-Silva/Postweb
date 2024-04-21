@@ -1,6 +1,6 @@
 import { BrowserRouter as Router,Routes, Route } from "react-router-dom";
 import { AlertContext } from "@/app/contexts/alerts.js"
-import { useState,useRef,createContext } from 'react'
+import { useState,useEffect,useRef,createContext } from 'react'
 import Alert from "@/UI/components/application-message/index.jsx";
 
 
@@ -27,8 +27,8 @@ import Home from '@/UI/layouts/home.jsx'
 
 
 function App() {
-  const [exists,setExists]=useState(null);    
-  const coldown=useRef(false)
+  const [exists,setExists]=useState(null);
+  const coldown=useRef(false);
 
 
   let time;

@@ -32,7 +32,7 @@ export const RootHome=styled.main`
 	justify-content: space-between;
 `
 
-export const ContentHome=styled.section`
+export const ContentHome=styled.section`	
 	width:100%;
 	min-height:100vh;
 

@@ -1,16 +1,18 @@
-import {ContentHome,RootHome} from '@/UI/layouts/styled.ts';
+// ~. Components Included
 import Header from '@/UI/partials/header/index.jsx'
 import Footer from '@/UI/partials/footer/index.jsx'
 
+import {
+	ContentHome,RootHome
+} from '@/UI/layouts/styled.ts';
+// ~~~~~~~~~~~~~~~~~~~~~~
 
-const Layouts=({children})=>
+
+export default ({children})=>
 (
 	<RootHome>
-		<Header/>
 		<ContentHome children={children}/>
+		<Header/>
 		<Footer/>
 	</RootHome>
 )
-
-
-export default Layouts;
