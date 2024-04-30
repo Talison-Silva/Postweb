@@ -38,7 +38,7 @@ export default ()=>
     {
         try
         {
-            var {data}=await api.get('/users/me');
+            var {data}=await api.get('/new-users/myAccount');
             localStorage.setItem('user',JSON.stringify(data[0]))
             setResponse(data[0])
         }

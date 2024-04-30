@@ -14,7 +14,7 @@ export default ({users,date})=>
 (
 	<ContainerSRS>
         <LeftSRS children={
-        	<PhotoSRS src={`http://localhost:3005/${users.photo}`}/>
+        	<PhotoSRS src={`http://localhost:3005/static/photo-perfil/${users.photo}`}/>
         }/>
         <RightSRS>
             <InformationsSRS>

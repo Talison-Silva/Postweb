@@ -25,7 +25,7 @@ const Index=()=>{
     {
         try
         {
-            const {data}=await api.get('/users/')
+            const {data}=await api.get('/new-users/')
             setUsers(data)
         }
         catch(err)

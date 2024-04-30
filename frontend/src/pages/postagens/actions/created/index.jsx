@@ -68,7 +68,7 @@ const Created=()=>{
     {
         try
         {
-            const {data}=await api.post('/application/',values);
+            const {data}=await api.post('/new-posts/',values);
         }
         catch(err)
         {
@@ -119,7 +119,7 @@ const Created=()=>{
                             <Sections className="p-5">
                                 <Input name="title" cookie={setCookies} label="digite o titulo adequado para o conteudo com a postagem"/>
                                 <Input name="description" cookie={setCookies} label="faça uma breve descrisão do conteudo da postagem"/>
-                                <Photography name="photography" set={setFieldValue}/>
+                                <Photography name="emphasis" set={setFieldValue}/>
                             </Sections>
                             <Sections>
                                 <Editor name="content" cookie={setCookies}/>

@@ -63,8 +63,8 @@ const Authorization=()=>
     {
         try
         {
-            const {data}=await api.post("/users/authenticate",value)
-            localStorage.setItem("token",data.token)            
+            const {data}=await api.post("/new-users/authenticate",value)
+            localStorage.setItem("token",data.token)         
             setStatus(200)
 
             setTimeout(()=>

@@ -40,6 +40,7 @@ export default ({id,title,description,content,deleted,created,user})=>
     }
 
     const userLogging=JSON.parse(localStorage.getItem('user'))
+    console.log('logging ~',userLogging)
 
     const registed={
         date:date.getDate(),
@@ -67,12 +68,12 @@ export default ({id,title,description,content,deleted,created,user})=>
             <LeftPTS>                
                 <IF condition={(userLogging.username===user.username)} IF={
                     <ClosePTS type="button" onClick={()=>{deleted(id)}}/>
-                } ELSE={                                        
+                } ELSE={
                     <LockClosedIcon className="w-7 h-7 absolute top-6 left-6 stroke-2 text-white"/>
                 }/>
 
                 <AccountPTS>
-                    <AccountPhotoPTS src={`http://localhost:3005/${user.photo}`}/>
+                    <AccountPhotoPTS src={`http://localhost:3005/static/photo-perfil/${user.photo}`}/>
                     <AccountInforPTS>
                         <h1 className="uppercase text-xl" children={user.username}/>
                         <AccountInforSpanPST>

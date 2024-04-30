@@ -44,7 +44,7 @@ const Badge=()=>
     {       
         try
         {
-            const {data}=await api.get("/users/me")
+            const {data}=await api.get("/new-users/myAccount")
             setResponse(data[0])
         }
         catch(err)
@@ -86,7 +86,7 @@ const Badge=()=>
             !(loading) && 
             <Container>
               <Rows>
-                  <Photo url={`http://localhost:3005/${response.photo}`}/>
+                  <Photo url={`http://localhost:3005/static/photo-perfil/${response.photo}`}/>
                   <Input name="username" value={response.username}/>
               </Rows>
               <Columns>                                

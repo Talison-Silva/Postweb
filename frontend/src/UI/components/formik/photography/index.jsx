@@ -52,7 +52,7 @@ const photography=({name,set,...props})=>
 		console.log('JSON:', await JSON.stringify(file))
 		if(file)
 		{
-			set('photography',file)
+			set('emphasis',file)
 
 			//helpers.setValue(photographyRef.current.value)
 

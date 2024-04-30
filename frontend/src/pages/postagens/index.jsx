@@ -24,7 +24,7 @@ const Index=()=>{
     {
         try
         {
-            const {status}=await api.delete(`/application/${id}`)
+            const {status}=await api.delete(`/new-posts/${id}`)
 
             switch(status)
             {
@@ -48,7 +48,7 @@ const Index=()=>{
     {
         try
         {
-            const {data}=await api.get('/application/')
+            const {data}=await api.get('/new-posts/')            
             setResponse(data)
         }
         catch(err)

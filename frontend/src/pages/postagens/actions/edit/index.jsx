@@ -68,7 +68,7 @@ const Edit=()=>{
     {
         try
         {
-            const {status}= await api.put('/application/',{id,...data})
+            const {status}= await api.put('/new-posts/',{id,...data})
             switch(status){
                 case 200:
                     console.log(200)
@@ -92,7 +92,7 @@ const Edit=()=>{
     {
         try
         {
-            const {data}=await api.get(`/application/?filter={"id":${id}}`)
+            const {data}=await api.get('/new-posts/',{filter:{"id": id }} )
             setInitial
             (
                 {
@@ -115,7 +115,7 @@ const Edit=()=>{
     }
 
 
-    const [initial,setInitial]=useState({title:'helo',description:'helo',content:'helo'})
+    const [initial,setInitial]=useState({title:'',description:'',content:''})
     const [cookies,setCookies,removeCookies]= useCookies([`postagens-edit`]);
     const [loading,setLoading]=useState(true)
     const {register,handleSubmit}=useForm()

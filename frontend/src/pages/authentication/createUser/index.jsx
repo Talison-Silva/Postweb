@@ -65,7 +65,7 @@ function createUser(){
     {
         try
         {
-            var response=await api.post('/users/register',{...values,photo:filei})
+            var response=await api.post('/new-users/register',{...values,photo:filei})
         }
         catch(err)
         {
