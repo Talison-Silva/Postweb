@@ -1,7 +1,5 @@
 import { BrowserRouter as Router,Routes, Route } from "react-router-dom";
-import { AlertContext } from "@/app/contexts/alerts.js"
 import { useState,useEffect,useRef,createContext } from 'react'
-import Alert from "@/UI/components/application-message/index.jsx";
 
 
 // ---| Postagens |--------------------------------------------------------
@@ -12,24 +10,28 @@ import PostagensEdit from '@/pages/postagens/actions/edit/index.jsx'
 import PostagensCreated from '@/pages/postagens/actions/created/index.jsx'
 // ---||-------------------------------------------------------------------
 
-
 // ---| Authentication |---------------------------------------------------
 import Authorization from '@/pages/authentication/authorization/index.jsx';
 import CreateUser from '@/pages/authentication/createUser/index.jsx';
 import Badge from '@/pages/authentication/badge/index.jsx';
 // ---||-------------------------------------------------------------------
 
-
 // ---| Layouts |----------------------------------------------------------
 import Authentication from '@/UI/layouts/authentication.jsx'
 import Home from '@/UI/layouts/home.jsx'
 // ---||-------------------------------------------------------------------
 
+// ---| utilities |--------------------------------------------------------
+//import 'dotenv/config';
+import { AlertContext } from "@/app/contexts/alerts.js"
+import Alert from "@/UI/components/application-message/index.jsx";
+// ---||-------------------------------------------------------------------
+
+
 
 function App() {
   const [exists,setExists]=useState(null);
   const coldown=useRef(false);
-
 
   let time;
   const alert=async(values)=>

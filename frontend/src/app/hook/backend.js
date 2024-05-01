@@ -2,7 +2,7 @@ import axios from 'axios';
 import {Service} from 'axios-middleware'
 
 const api=axios.create({
-    baseURL:'http://localhost:3005',
+    baseURL:import.meta.env.VITE_BASE_URL_API,
     headers:{
         "Content-Type":"multipart/form-data",
         "authorization":`Bearer ${localStorage.getItem("token")}`
