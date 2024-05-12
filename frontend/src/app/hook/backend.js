@@ -1,26 +1,31 @@
+import Cookies from 'universal-cookie';
 import axios from 'axios';
-import {Service} from 'axios-middleware'
+
+const cookies = new Cookies(null, { path: '/' });
 
 const api=axios.create({
     baseURL:import.meta.env.VITE_BASE_URL_API,
     headers:{
-        "Content-Type":"multipart/form-data",
-        "authorization":`Bearer ${localStorage.getItem("token")}`
+        "Content-Type":"multipart/form-data"        
     }
 })
 
-// "authorization":`Bearer ${localStorage.getItem("token")}`
+// "authorization":`Bearer ${cookies.get('token.auth')}`
+
 
 api.interceptors.request.use(
 	config =>{
-		if(localStorage.getItem("token")){
-			config.headers.authorization=`Bearer ${localStorage.getItem("token")}`
+		const tokenAuth=cookies.get('token.auth');
+
+		if(tokenAuth)
+		{
+			config.headers.authorization=`Bearer ${tokenAuth}`						
 		}
-		console.log(config.headers.authorization)
+
 		return config
 	},
-	error=>{
-		return Promise.reject(error)
+	error=>{		
+		return Promise.reject(error);
 	}
 )
 

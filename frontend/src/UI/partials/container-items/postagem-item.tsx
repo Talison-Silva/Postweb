@@ -53,13 +53,13 @@ export default ({id,title,description,content,deleted,created,user})=>
 
     const editPRPS={
         type:"button",
-        onClick:()=>{navigate(`/postagens/e/${id}`)},
+        onClick:()=>{navigate(`/posts/edit/${id}`)},
         children:"Edit"
     }
 
     const extendPRPS={
         type:"button",
-        onClick:()=>{navigate(`/postagens/m/${id}`)},
+        onClick:()=>{navigate(`/posts/more/${id}`)},
         children:!(userLogging.username===user.username)?'extend post':'extend'
     }
 

@@ -22,8 +22,8 @@ export default ()=>
         <NavigationNVGT children={
             <GroupNVGT>
                 <ItemNVGT children={<ButtonNVGT onClick={()=>{navigate('/')}}>home</ButtonNVGT>}/>
-                <ItemNVGT children={<ButtonNVGT onClick={()=>{navigate('/postagens/')}}>posts</ButtonNVGT>}/>
-                <ItemNVGT children={<ButtonNVGT onClick={()=>{navigate('/usuarios/')}}>users</ButtonNVGT>}/>
+                <ItemNVGT children={<ButtonNVGT onClick={()=>{navigate('/posts/')}}>posts</ButtonNVGT>}/>
+                <ItemNVGT children={<ButtonNVGT onClick={()=>{navigate('/users/')}}>users</ButtonNVGT>}/>
             </GroupNVGT>
         }/>
     )

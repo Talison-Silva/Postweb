@@ -1,12 +1,9 @@
 //import Postagens from '@/UI/components/tables/postagens/index.jsx';
-import Postagens from '@/UI/partials/container-items/postagem-item.tsx';
-import { useEffect,useState,useContext } from "react";
+import Posts from '@/UI/partials/container-items/postagem-item.tsx';
 import Loading from "@/UI/components/loading/index.jsx";
-import { AlertContext } from "@/app/contexts/alerts.js"
-import { useNavigate } from "react-router-dom";
+import { useEffect,useState } from "react";
+import {Hook} from "@/app/hook/hook.ts";
 import styled from 'styled-components';
-import api from "@/app/hook/backend.js";
-
 
 const Container=styled.div`
     width:100%;
@@ -18,96 +15,34 @@ const Container=styled.div`
 `
 
 
-const Index=()=>{
-
-    const deleted=async(id)=>
+export default () => 
+{
+    const fetchPosts = async () =>
     {
-        try
-        {
-            const {status}=await api.delete(`/new-posts/${id}`)
-
-            switch(status)
-            {
-                case 203:
-                    console.log(203)
-                    break
-                default:
-                    console.log(200)
-            }
-        }
-        catch(err)
-        {
-            console.error(err.response.status)
-        }
-
-        setResponse(response.filter(post => post.id !== id))
+        const { data } = await Hook.push('/new-posts/').get();setResponse( data );
+        setTimeout(()=>{setLoading(false)},1000);
     }
 
-
-    const fetchPostagens=async()=>
+    const deleted = async id =>
     {
-        try
-        {
-            const {data}=await api.get('/new-posts/')            
-            setResponse(data)
-        }
-        catch(err)
-        {
-            switch(err.response.status){
-                case 401:
-                    navigate('/entrar?')
-                    break
-                default:
-                    console.error(err)
-            }
-        }
-
-        setTimeout(()=>
-        {
-            setLoading(false)
-        }
-        ,1000);
+        await Hook.push(`/new-posts/${id}`).delete();
+        setResponse(response.filter(post => post.id !== id));
     }
 
+    
+    const [loading,setLoading]=useState(true);
+    const [response,setResponse]=useState();
+    useEffect(()=>{fetchPosts()},[]);
+    var itms=[];
 
-    const [loading,setLoading]=useState(true)
-    const [response,setResponse]=useState()
-    const alert=useContext(AlertContext)
-    const navigate=useNavigate()
 
+    if(!loading)
+    {
+        response?.map((posts,index)=>{
+            itms.push(<Posts deleted={deleted} key={index} {...posts}/>)
+        });
 
-    useEffect(()=>{
-        fetchPostagens()
-    },[])
-
-    return(
-        <>
-        {
-            (!loading) && 
-            <Container>
-                {response?.map((postagens,index)=>{
-                    return (
-                        <Postagens
-                            deleted={deleted}
-                            id={postagens.id}
-                            title={postagens.title}
-                            created={postagens.createdAt}
-                            description={postagens.description}
-                            content={postagens.content}
-                            user={postagens.user}
-                            key={index}
-                        />
-                    )
-                })}
-            </Container>
-        }
-        {
-            loading &&
-            <Loading/>
-        }
-        </>
-    );
+        return <Container children={itms}/>;
+    }
+    else{ return <Loading/> }
 }
-
-
-export default Index;

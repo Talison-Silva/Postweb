@@ -1,11 +1,9 @@
 import {dateComplete} from '@/app/utils/DateComplete/index.js';
 import Users from '@/UI/partials/container-items/user-item.tsx';
-//import Users from '@/UI/components/items/users/index.jsx';
 import Loading from "@/UI/components/loading/index.jsx";
-import { useNavigate } from "react-router-dom";
 import {useEffect,useRef,useState} from "react";
+import {Hook} from "@/app/hook/hook.ts";
 import styled from 'styled-components';
-import api from "@/app/hook/backend.js";
 
 
 const Container=styled.section`
@@ -19,73 +17,36 @@ const Container=styled.section`
 `
 
 
-const Index=()=>{
-
+export default () =>
+{
     const fetchUsers=async()=>
     {
-        try
-        {
-            const {data}=await api.get('/new-users/')
-            setUsers(data)
-        }
-        catch(err)
-        {
-            switch(err.response.status){
-                case 401:
-                    navigate('/entrar?')
-                    break
-                default:
-                    console.error(err)
-            }
-        }
-
-        setTimeout(()=>
-        {
-            setLoading(false)
-        }
-        ,1000);
+        const { data } = await Hook.push('/new-users/').get();setUsers( data );
+        setTimeout(() => {setLoading(false)},1000 );
     }
 
 
-    const [loading,setLoading]=useState(true)
-    const [users,setUsers]=useState([]);
-    const navigate=useNavigate();
-    const date=useRef(null)
+    const [loading,setLoading]=useState(true);
+    const [users,setUsers]=useState([]);    
+    const date=useRef(null);
+    var itms=[];
 
 
-    useEffect(()=>
-    {
-        fetchUsers()
-    }
-    ,[])
-
-    useEffect(()=>
-    {
-        if(users.length!==0)
-        {
+    useEffect(() => {fetchUsers()},[]);
+    useEffect(() => {
+        if(users.length!==0){
             date.current=dateComplete(users[0].createdAt)
         }        
+    },[users]);
+
+
+    if(!loading)
+    {        
+        users?.map( users => {
+            itms.push(<Users users={users} date={date.current}/>)
+        })
+
+        return <Container children={itms}/>;
     }
-    ,[users])
-
-    return(
-        <>
-            {   !loading && 
-                <Container>
-                    {
-                        users?.map((users,index)=>{
-                            return(<Users users={users} date={date.current}/>)
-                        })
-                    }
-                </Container>
-            }
-            {
-                loading && 
-                <Loading/>
-            }
-        </>
-    )
+    else {return <Loading/>}
 }
-
-
-export default Index;

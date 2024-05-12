@@ -1,6 +1,7 @@
 import Loading from "@/UI/components/loading/index.jsx";
 import React,{useEffect,useState} from "react";
 import { useParams } from "react-router-dom";
+import {Hook} from "@/app/hook/hook.ts";
 import styled from 'styled-components';
 import api from "@/app/hook/backend";
 
@@ -21,19 +22,13 @@ const Container=styled.section`
 `
 
 
-const More=()=>{
+export default () => 
+{
 
     const fetchMore=async()=>
     {
-        try
-        {
-            const {data}=await api.get(`/application/?filter={"id":${id}}`)
-            setLermais(data[0].content)
-        }
-        catch(err)
-        {
-            console.error(err)
-        }
+        const { data } = await Hook.push('/new-posts/').get({filter:{"id": id }});
+        setLermais(data[0].content)
         setLoading(false)
     }
 
@@ -42,25 +37,12 @@ const More=()=>{
     const [lermais,setLermais]=useState()
     const {id}=useParams()
 
+    useEffect(()=>{fetchMore()},[])
 
-    useEffect(()=>{
-        fetchMore()
-    },[])
 
-    return(
-        <>
-        {
-            !loading &&
-            <Container>
-                <p>{lermais}</p>
-            </Container>
-        }
-        {
-            loading && 
-            <Loading/>
-        }
-        </>
-    );
+    if(!loading)
+    {
+        return <Container children={<p>{lermais}</p>}/>;
+    }
+    else { return <Loading/> }
 }
-
-export default More;

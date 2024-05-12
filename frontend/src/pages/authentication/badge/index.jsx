@@ -1,12 +1,11 @@
-import Loading from "@/UI/components/loading/index.jsx";
 import { useNavigate } from "react-router-dom";
-import {useState,useEffect} from 'react'
-import api from '@/app/hook/backend.js'
 import styled from "styled-components";
 import Input from "@/UI/components/show/input/index.jsx";
 import Description from "@/UI/components/show/description/index.jsx";
 import Photo from "@/UI/components/show/photo/index.jsx";
 
+import {AuthContext} from '@/app/contexts/AuthContext.tsx';
+import {useContext} from 'react';
 
 const Container=styled.section`
     width: 100%;
@@ -38,68 +37,23 @@ const Columns=styled.div`
 `
 
 
-const Badge=()=>
+export default () =>
 {
-    const fetchUser=async()=>
-    {       
-        try
-        {
-            const {data}=await api.get("/new-users/myAccount")
-            setResponse(data[0])
-        }
-        catch(err)
-        {
-            switch(err.response.status){
-                case 401:
-                    navigate('/entrar?')
-                    break
-                default:
-                    console.error(err)
-            }
-        }
-    }
-
-
-    const [loading,setLoading]=useState(true);
-    const [response,setResponse]=useState();
-    const navigate=useNavigate();
-
-
-    useEffect(()=>
-    {
-        fetchUser()
-    }
-    ,[])
-
-    useEffect(()=>
-    {
-        if(response)
-        {            
-            setLoading(false)
-        }
-    }
-    ,[response])
+    const { isClient } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     return(
-        <>
-        {
-            !(loading) && 
-            <Container>
-              <Rows>
-                  <Photo url={`http://localhost:3005/static/photo-perfil/${response.photo}`}/>
-                  <Input name="username" value={response.username}/>
-              </Rows>
-              <Columns>                                
-                  <Input name="email" value={response.email}/>
-                  <Description name="me" value={response.me}/>
+        <Container>
+            <Rows>
+                <Photo url={`http://localhost:3005/static/photo-perfil/${isClient.photo}`}/>
+                <Input name="username" value={isClient.username}/>
+            </Rows>
+            <Columns>                                
+                <Input name="email" value={isClient.email}/>
+                <Description name="me" value={isClient.me}/>
 
-                  <button onClick={()=>{navigate('/postagens/')}} type="button" className="w-full h-16 bg-white rounded-xl text-black uppercase font-ubuntuMono">proseguir?</button>
-              </Columns>
-            </Container>
-        }
-        </>
+                <button onClick={()=>{navigate('/posts/')}} type="button" className="w-full h-16 bg-white rounded-xl text-black uppercase font-ubuntuMono">proseguir?</button>
+            </Columns>
+        </Container>
     )
 }
-
-
-export default Badge;

@@ -8,6 +8,8 @@ import styled from "styled-components";
 import * as Yup from "yup";
 import State from '@/UI/components/authorization-state/index.jsx'
 
+import {AuthContext} from '@/app/contexts/AuthContext.tsx';
+import {useContext} from 'react';
 
 const Submit=styled.button`
     margin-top:10px;
@@ -57,32 +59,22 @@ const validationSchema=Yup.object({
 })
 
 
-const Authorization=()=>
+export default () =>
 {
-    const submit=async(value,{setSubmitting})=>
-    {
-        try
-        {
-            const {data}=await api.post("/new-users/authenticate",value)
-            localStorage.setItem("token",data.token)         
-            setStatus(200)
-
-            setTimeout(()=>
-            {
-                navigate("/me")
-            }
-            ,1000)
-        }
-        catch(err)
-        {
-            setStatus(500)
+    const submit=async(fields,{setSubmitting})=>
+    {               
+        try{
+            await authenticate(fields);
+            
+            setStatus(200);setTimeout(() => navigate("/badge"),1000);
+        }catch(err){
+            setStatus(500)            
         }
         setSubmitting(false)
     }
 
-
-    const {register,handleSubmit}=useForm()
-    const [status,setStatus]=useState(0)
+    const {authenticate}=useContext(AuthContext);
+    const [status,setStatus]=useState(0);
     const navigate= useNavigate();
 
 
@@ -110,11 +102,8 @@ const Authorization=()=>
                 )}
             </Formik>
             <LogUp>
-                voçê não possui uma conta? <a href="/registrar" className="text-blue-500">click aqui</a>
+                voçê não possui uma conta? <a href="/signUp" className="text-blue-500">click aqui</a>
             </LogUp>
         </Container>
     )
 }
-
-
-export default Authorization;

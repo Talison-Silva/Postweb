@@ -1,12 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import {useForm} from 'react-hook-form';
-import api from '@/app/hook/backend.js'
 import {useState,useRef} from 'react';
 import styled from 'styled-components';
 
 import Input from '@/UI/components/formik/input/index.jsx';
 import Photo from '@/UI/components/formik/photo/index.jsx';
 import Description from '@/UI/components/formik/description/index.jsx';
+import {Hook} from "@/app/hook/hook.ts";
 import {Formik,Form} from 'formik';
 import * as Yup from 'yup';
 
@@ -59,26 +58,15 @@ const validationSchema=Yup.object({
 })
 
 
-function createUser(){
-
+export default () => 
+{
     const submit=async(values,{setSubmitting})=>
     {
-        try
-        {
-            var response=await api.post('/new-users/register',{...values,photo:filei})
-        }
-        catch(err)
-        {
-            console.error(err)
-        }
-
+        await Hook.push('/new-users/register').post({...values,photo:filei});
         setSubmitting(false)
     }
 
 
-    const [visibility,setVisibility]=useState(true);
-    const [status,setStatus]=useState(undefined);
-    const {register,handleSubmit}=useForm();
     const [filei,setFilei]=useState(null);
     const navigate= useNavigate();
     const file= useRef(null);
@@ -119,5 +107,3 @@ function createUser(){
         </Container>
     )
 }
-
-export default createUser;

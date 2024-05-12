@@ -7,12 +7,28 @@ import {
 } from '@/UI/layouts/styled.ts';
 // ~~~~~~~~~~~~~~~~~~~~~~
 
+import {AuthContext} from '@/app/contexts/AuthContext.tsx';
+import Loading from "@/UI/components/loading/index.jsx";
+import {useContext,useEffect} from 'react';
+
 
 export default ({children})=>
-(
-	<RootHome>
-		<ContentHome children={children}/>
-		<Header/>
-		<Footer/>
-	</RootHome>
-)
+{
+	const {isClient,refreshjwt}=useContext(AuthContext);
+	
+	if(!isClient)
+	{		
+		refreshjwt()
+	}
+
+	if(isClient)
+	{
+		return(
+			<RootHome>
+				<ContentHome children={children}/>
+				<Header/>
+				<Footer/>
+			</RootHome>
+		)
+	}	
+}

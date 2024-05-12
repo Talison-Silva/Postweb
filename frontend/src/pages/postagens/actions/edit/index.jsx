@@ -3,15 +3,11 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
-//import hook-form
-import {useForm} from 'react-hook-form';
-
 //import loading
 import Loading from "@/UI/components/loading/index.jsx";
 
-//backend connection
-import api from "@/app/hook/backend.js";
 import {useCookies} from 'react-cookie';
+import {Hook} from "@/app/hook/hook.ts";
 
 import styled from 'styled-components';
 
@@ -63,127 +59,77 @@ const Submit=styled.div`
     align-items:center;
 `
 
-const Edit=()=>{
+export default () => 
+{
     const submit=async(data)=>
     {
-        try
-        {
-            const {status}= await api.put('/new-posts/',{id,...data})
-            switch(status){
-                case 200:
-                    console.log(200)
-                    break;
-                case 203:
-                    console.log(203)
-                    break;
-                default:
-                    console.log('???')
-            }
-            navigate('/postagens/');
-        }
-        catch(err)
-        {
-            console.error(err)
-        }
+        await Hook.push('/new-posts/').put({id,...data});
+        navigate('/posts/');
     }
 
 
     const fetchPostagem=async()=>
     {
-        try
-        {
-            const {data}=await api.get('/new-posts/',{filter:{"id": id }} )
-            setInitial
-            (
-                {
-                    description:data[0].description,
-                    content:data[0].content,
-                    title:data[0].title,
-                }
-            );
-        }
-        catch(err)
-        {
-            console.error(err)
-        }
+        const { data } = await Hook.push('/new-posts/').get({filter: JSON.stringify({id:id}) });
+        setInitial({description:data[0].description,content:data[0].content,title:data[0].title});
 
-        setTimeout(()=>
-        {
-            setLoading(false)
-        }
-        ,1000)
+        setTimeout(() => {setLoading(false)},1000);
     }
 
 
-    const [initial,setInitial]=useState({title:'',description:'',content:''})
-    const [cookies,setCookies,removeCookies]= useCookies([`postagens-edit`]);
-    const [loading,setLoading]=useState(true)
-    const {register,handleSubmit}=useForm()
-    const navigate=useNavigate()
-    const {id}=useParams()
+    const [initial,setInitial]=useState({title:'',description:'',content:''});
+    const [cookies,setCookies]= useCookies([`postagens-edit`]);
+    const [loading,setLoading]=useState(true);
+    const navigate=useNavigate();
+    const {id}=useParams();
 
 
-    useEffect(()=>{
-        fetchPostagem()
-    },[])
+    useEffect(()=>{fetchPostagem()},[])
 
-    return (
-        <>
-        {
-            !loading &&
-            <>
-                <Container>
-                    <Historic schema={
-                        [{
-                            name:'title',
-                            type:'text',
-                            value:cookies[`title${id}`]
-                        },{
-                            name:'description',
-                            type:'text',
-                            value:cookies[`description${id}`]
-                        },{
-                            name:'content',
-                            type:'textarea',
-                            value:cookies[`content${id}`]
-                        }]
-                    } />                    
-                    <Formik
-                        onSubmit={submit}
-                        initialValues={initial}
-                    >
-                        {({setFieldValue,values})=>(
-                            <Form className="min-w-min min-h-min flex flex-col justify-between">
-                                <Right>
-                                    <Sections className="p-5">
-                                        <Input name="title" id={id} cookie={setCookies} label="digite o titulo adequado para o conteudo com a postagem"/>
-                                        <Input name="description" id={id} cookie={setCookies} label="faça uma breve descrisão do conteudo da postagem"/>
-                                        <Photography name="photography" set={setFieldValue}/>
-                                    </Sections>
-                                    <Sections>
-                                        <Editor name="content" id={id} cookie={setCookies}/>
-                                    </Sections>
-                                </Right>
-                                <Submit>
-                                    <Button onClick={()=>
-                                        {
-                                            navigate('/postagens/')
-                                        }
-                                    }>voltar</Button>
-                                    <Button type="submit">editar</Button>
-                                </Submit>
-                            </Form>
-                        )}
-                    </Formik>
-                </Container>
-            </>
-        }
-        {
-            loading && 
-            <Loading/>
-        }
-        </>
-    );
+    if(!loading)
+    {
+        return(
+            <Container>
+                <Historic schema={
+                    [{
+                        name:'title',
+                        type:'text',
+                        value:cookies[`title${id}`]
+                    },{
+                        name:'description',
+                        type:'text',
+                        value:cookies[`description${id}`]
+                    },{
+                        name:'content',
+                        type:'textarea',
+                        value:cookies[`content${id}`]
+                    }]
+                } />                    
+                <Formik
+                    onSubmit={submit}
+                    initialValues={initial}
+                >
+                    {({setFieldValue,values})=>(
+                        <Form className="min-w-min min-h-min flex flex-col justify-between">
+                            <Right>
+                                <Sections className="p-5">
+                                    <Input name="title" id={id} cookie={setCookies} label="digite o titulo adequado para o conteudo com a postagem"/>
+                                    <Input name="description" id={id} cookie={setCookies} label="faça uma breve descrisão do conteudo da postagem"/>
+                                    <Photography name="photography" set={setFieldValue}/>
+                                </Sections>
+                                <Sections>
+                                    <Editor name="content" id={id} cookie={setCookies}/>
+                                </Sections>
+                            </Right>
+                            <Submit>
+                                <Button onClick={() => navigate('/posts/')}>voltar</Button>
+                                <Button type="submit">editar</Button>
+                            </Submit>
+                        </Form>
+                    )}
+                </Formik>
+            </Container>
+        )
+    }
+    else { return <Loading/> }
 }
-
-export default Edit;

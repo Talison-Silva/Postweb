@@ -1,19 +1,10 @@
 import React from "react";
-import {useState} from "react";
-import {useForm} from 'react-hook-form';
 
-import {marked} from "marked";
-//import loading
-import Loading from "@/UI/components/loading/index.jsx";
-
-//backend connection
-import api from "@/app/hook/backend.js";
-
-//navigate
 import { useNavigate } from "react-router-dom";
 
 import {useCookies} from 'react-cookie';
 import styled from 'styled-components';
+import {Hook} from "@/app/hook/hook.ts";
 import Historic from '@/UI/components/historic/index.jsx';
 import {Formik,Form} from 'formik';
 
@@ -62,30 +53,20 @@ const Button=styled.button`
     text-transform:uppercase;
 `
 
-const Created=()=>{
+export default () => 
+{
 
-    const submit=async(values,setSubmitting)=>
-    {
-        try
-        {
-            const {data}=await api.post('/new-posts/',values);
-        }
-        catch(err)
-        {
-            console.error(err)
-        }
-        finally
-        {
-            navigate('/postagens/')
-        }
-        setSubmitting(false)
+    const submit = async (values,setSubmitting) =>
+    {        
+        await Hook.push('/new-posts/').post(values);
+        navigate('/posts/');
+
+        setSubmitting(false);
     }
 
 
-    const [cookies,setCookies,removeCookies]= useCookies([`postagens-created`]);
-    const [editor,setEditor]=useState({title:'',description:'',content:''})
-    const {register,handleSubmit}=useForm()
-    const navigate=useNavigate()
+    const [cookies,setCookies] = useCookies([`postagens-created`]);
+    const navigate = useNavigate();
 
     
     return (
@@ -126,11 +107,7 @@ const Created=()=>{
                             </Sections>
                         </Right>
                         <Submit>
-                            <Button onClick={()=>
-                                {
-                                    navigate('/postagens/')
-                                }
-                            }>voltar</Button>
+                            <Button onClick={()=>{navigate('/posts/')}}>voltar</Button>
                             <Button type="submit">adicionar</Button>
                         </Submit>
                     </Form>
@@ -139,6 +116,3 @@ const Created=()=>{
         </Container>
     );
 }
-
-
-export default Created;

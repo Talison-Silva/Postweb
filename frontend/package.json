@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "start:dev": "vite",
     "build": "tsc && vite build --mode production",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
@@ -22,6 +22,7 @@
     "react-router-dom": "^6.23.0",
     "save": "^2.9.0",
     "styled-components": "^6.1.9",
+    "universal-cookie": "^7.1.4",
     "yup": "^1.4.0"
   },
   "devDependencies": {
