@@ -21,17 +21,21 @@ import {
     ButtonPTS,
     RightPTS,
     ClosePTS,
-    LeftPTS
+    LeftPTS,
+    LeftBlur
 } from '@/UI/partials/styled.tsx';
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+import {AuthContext} from '@/app/contexts/AuthContext.tsx';
+import {useContext} from 'react';
 
 
-export default ({id,title,description,content,deleted,created,user})=>
+
+export default ({id,title,description,content,deleted,emphasis,createdAt,user})=>
 {
     const navigate=useNavigate()
 
-    const date=new Date(created)
+    const date=new Date(createdAt)
 
     const complete=(v)=>
     {
@@ -39,9 +43,7 @@ export default ({id,title,description,content,deleted,created,user})=>
         return(v)
     }
 
-    const userLogging=JSON.parse(localStorage.getItem('user'))
-    console.log('logging ~',userLogging)
-
+    const {isClient}=useContext(AuthContext);
     const registed={
         date:date.getDate(),
         month:date.getMonth(),
@@ -60,39 +62,46 @@ export default ({id,title,description,content,deleted,created,user})=>
     const extendPRPS={
         type:"button",
         onClick:()=>{navigate(`/posts/more/${id}`)},
-        children:!(userLogging.username===user.username)?'extend post':'extend'
-    }
+        children:!(isClient.username===user.username)?'extend post':'extend'
+    }    
 
     return(
         <ContainerPTS>
-            <LeftPTS>                
-                <IF condition={(userLogging.username===user.username)} IF={
-                    <ClosePTS type="button" onClick={()=>{deleted(id)}}/>
-                } ELSE={
-                    <LockClosedIcon className="w-7 h-7 absolute top-6 left-6 stroke-2 text-white"/>
-                }/>
+            <LeftPTS style={{
+                backgroundImage:`url('http://localhost:3005/static/emphasis/${emphasis}')`,
+                backgroundSize:'cover',
+                backgroundPosition:'center',
+                backdropFilter:'blur(15px)'
+            }}>
+                <LeftBlur>
+                    <IF condition={(isClient.username===user.username)} IF={
+                        <ClosePTS type="button" onClick={()=>{deleted(id)}}/>
+                    } ELSE={
+                        <LockClosedIcon className="w-[18px] h-[18px] absolute top-[18px] left-[18px] stroke-2 text-white"/>
+                    }/>
 
-                <AccountPTS>
-                    <AccountPhotoPTS src={`http://localhost:3005/static/photo-perfil/${user.photo}`}/>
-                    <AccountInforPTS>
-                        <h1 className="uppercase text-xl" children={user.username}/>
-                        <AccountInforSpanPST>
-                            <p className="text-green-500 text-xs" children={`${complete(registed.date)}.${complete(registed.month)}.${complete(registed.year)}`}/>
-                            <p className="text-green-500 text-xs" children={`${complete(registed.hour)}:${complete(registed.min)}`}/>
-                        </AccountInforSpanPST>
-                    </AccountInforPTS>
-                </AccountPTS>
+                    <AccountPTS>
+                        <AccountPhotoPTS src={`http://localhost:3005/static/photo-perfil/${user.photo}`}/>
+                        <AccountInforPTS>
+                            <h1 className="uppercase text-[15px]" children={user.username}/>
+                            <AccountInforSpanPST>
+                                <p className="text-green-500 text-[9px]" children={`${complete(registed.date)}.${complete(registed.month)}.${complete(registed.year)}`}/>
+                                <p className="text-green-500 text-[9px]" children={`${complete(registed.hour)}:${complete(registed.min)}`}/>
+                            </AccountInforSpanPST>
+                        </AccountInforPTS>
+                    </AccountPTS>
+                </LeftBlur>
             </LeftPTS>
             <RightPTS>
 
                 <InformationsPTS>
-                    <h1 className="text-white uppercase text-4xl" children={title}/>
-                    <h3 className="text-[#525252] text-base" children={description}/>
-                    <p className="text-lg" children={content}/>
+                    <h1 className="text-white uppercase text-[27px]" children={title}/>
+                    <h3 className="text-[#525252] text-[12px]" children={description}/>
+                    <p className="text-[13px]" children={content}/>
                 </InformationsPTS>
 
                 <AreaButtonPTS>
-                    <IF condition={(userLogging.username===user.username)} IF={ <ButtonPTS {...editPRPS}/> }/>
+                    <IF condition={(isClient.username===user.username)} IF={ <ButtonPTS {...editPRPS}/> }/>
                     <ButtonPTS {...extendPRPS}/>
                 </AreaButtonPTS>
 

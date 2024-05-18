@@ -70,7 +70,7 @@ export default ()=>
 
     
     const [loading,setLoading]=useState(true);
-    const {isClient}=useContext(AuthContext);    
+    const {isClient}=useContext(AuthContext);
     const [created,setCreated]=useState([]);
     const [response,setResponse]=useState();
     const navigate=useNavigate();
@@ -78,9 +78,9 @@ export default ()=>
 
     useEffect(()=>
     {      
-      setCreated(
+      /*setCreated(
         identifyRouteCreated()
-      )
+      )*/
     }
     ,[window.location.pathname])
     
@@ -89,24 +89,24 @@ export default ()=>
     return(
       <ContainerHDR>
         <LogoHDR>
-            <LogoCircleHDR onClick={()=>{navigate('/')}}/>
+            {/*<LogoCircleHDR onClick={()=>{navigate('/')}}/>*/}
             <LogoTitleHDR children={'postweb'}/>                
         </LogoHDR>
 
         <NavigationHDR>
             <Navigate/>
-            <DinamicButtonHDR type="button"
+            {/*<DinamicButtonHDR type="button"
                 children={created[1]}
                 onClick={redirect}                  
-            />
+            />*/}
         </NavigationHDR>
 
         <ActionsHDR>
             <Dropped toggle={
               <AccountHDR>
                 <AccountInforHDR>
-                    <p className="font-bold text-nowrap text-white uppercase" style={{fontSize:"13px"}}>{isClient.username}</p>
-                    <p className="text-green-500 text-center" style={{fontSize:"11px"}}>online</p>
+                    <p className="font-bold text-nowrap text-white uppercase" style={{fontSize:"10px"}}>{isClient.username}</p>
+                    <p className="text-green-500 text-center" style={{fontSize:"8px"}}>online</p>
                 </AccountInforHDR>
 
                 <AccountPhotoHDR                       

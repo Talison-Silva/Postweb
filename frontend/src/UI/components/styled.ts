@@ -25,8 +25,9 @@ export const DroppedMN=styled.div`
 	min-width:155px;
 	min-height:40px;
 	padding:10px 0 10px 0;
-	background: linear-gradient(45deg,transparent,#262B2B,transparent,#262B2B,transparent,#262B2B);
-    border:1px solid #262B2B;    
+	//background: linear-gradient(45deg,transparent,#262B2B,transparent,#262B2B,transparent,#262B2B);
+	backdrop-filter:blur(5px);
+    border:3px dashed #262B2B;	
 	border-radius:10px;
 	color:white;
 

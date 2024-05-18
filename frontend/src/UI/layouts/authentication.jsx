@@ -23,7 +23,7 @@ export default ({authorization=false,children})=>
     	{
     		return(
 				<RootAuthentication>
-					<ContentAuthentication children={children}/>
+					{children}
 				</RootAuthentication>
 			)
     	}
@@ -32,7 +32,7 @@ export default ({authorization=false,children})=>
     {
     	return(
 			<RootAuthentication>
-				<ContentAuthentication children={children}/>
+				{children}
 			</RootAuthentication>
 		)
     }	

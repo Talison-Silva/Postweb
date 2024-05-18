@@ -5,18 +5,18 @@ import {useState,useEffect} from 'react';
 const Container=styled.div`
 	width:100%;display:flex;
 	flex-direction:column;
-	gap:8px;
+	gap:4px;
 `
 
 const FieldsStyled=styled.input`
-	width:100%;height:56px;
-	padding:20px;
+	width:100%;height:40px;
+	padding:10px;
 	border:1px solid #383838;
 	font-family:'Ubuntu mono',monospace;
-	font-size:20px;
+	font-size:14px;
 	background-color: transparent;
 	color:white;
-	border-radius:12px;
+	border-radius:8px;
 
 	outline: 2px solid transparent;
 	outline-offset: 2px;
@@ -27,7 +27,7 @@ const Label=styled.label`
 	letter-spacing: 1.75px;
 	color:white;
 	font-family:'Ubuntu mono',monospace;
-	font-size:20px;
+	font-size:12px;
 `
 
 const Focus=styled.span`
@@ -35,7 +35,7 @@ const Focus=styled.span`
 `
 
 const ErrorStyled=styled.span`
-	font-size:12px;
+	font-size:10px;
 	letter-spacing: 1.25px;
 	color: orange;
 	text-transform: uppercase;
@@ -78,7 +78,7 @@ function Input({name,type="",id,label,cookie,required,...props}){
 				{required && <Focus> *</Focus>}
 			</Label>
 			<Field as={FieldsStyled} name={name} type={type} {...props}/>
-			<ErrorMessage name={name} component={ErrorStyled} />
+			<ErrorMessage name={name} component={ErrorStyled}/>
 			{(!err && label) && <Little>{label}</Little>}
 		</Container>
 	)
