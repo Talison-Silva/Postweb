@@ -12,5 +12,5 @@ export const dateComplete=(date)=>
 		complete(old.getFullYear()),
 	]
 
-	return `${data[0]} ${data[1]} ${data[2]}`;
+	return `${data[0]}/${data[1]}/${data[2]}`;
 }

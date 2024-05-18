@@ -1,11 +1,18 @@
-export const identifyRouteCreated=()=>
-{
+export const identifyRouteCreated=(set:any)=>
+{	
 	switch(window.location.pathname)
 	{
 	  case "/posts/create":
-	    return([true,"voltar","/posts/"])
-	    break
+	    set({
+			name:"back",
+			url:"/posts/"
+		});
+	    break;
+
 	  default:
-	    return([false,"created","/posts/create"])          
+	    set({
+			name:"create",
+			url:"/posts/create"
+		});
 	}
 }
