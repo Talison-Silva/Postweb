@@ -1,4 +1,6 @@
 export default function verifyToken(req,res,next){
+	console.clear()
+	console.log('authorization ~',req.headers["authorization"])
     if(req.headers["authorization"]){
         const tokenbearer=(req.headers["authorization"]).split(" ")
         if(tokenbearer[1]!=="null"){

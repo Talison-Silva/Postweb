@@ -1,10 +1,8 @@
-import { mariadbConfig } from '@/config/sequelize-mariadb.ts';
-import { UsersModel } from '@/api/models/users/index.ts';
-import {Model,DataTypes,Sequelize} from 'sequelize';
+import {Model,DataTypes} from 'sequelize';
 
 class PostsModel extends Model{
 
-    static init(sequelize)
+    static init(sequelize:any):void
     {        
         super.init(
         {
@@ -35,12 +33,13 @@ class PostsModel extends Model{
         });        
     }
 
-    static associate(model){
+    static associate(model:any):void{
+        console.log('posts ~ associate')
         super.belongsTo(model,{
             foreignKey: 'userID',
             onDelete: 'cascade',
             hooks: true
-        })        
+        })
     }
 }
 

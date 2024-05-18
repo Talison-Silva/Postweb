@@ -15,6 +15,31 @@ export const applicationForApi=({id,...data})=>
 	return response;
 }
 
+interface User{
+	username:string,
+	photo:object,
+	email:string
+}
+
+
+export interface applicationForApiNew{
+	id?:number,
+	title?:string,
+	description?:string,
+	content?:string,
+	emphasis?:object
+}
+
+
+export interface apiForApplicationNew{
+	id:number,
+	title:string,
+	description:string,
+	content:string,
+	createdAt:string,
+	user:User
+}
+
 
 export const apiForApplication=(data)=>
 {
@@ -29,8 +54,9 @@ export const apiForApplication=(data)=>
 			description:itm.description,
 			content:itm.content,
 			createdAt:itm.createdAt,
+			emphasis:itm.emphasis,
 			user:{
-				username:itm.User.password,
+				username:itm.User.username,
 				photo:itm.User.photo,
 				email:itm.User.email
 			}

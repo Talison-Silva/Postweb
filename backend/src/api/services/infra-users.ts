@@ -30,17 +30,15 @@ export class InfraUsers extends MariaDB
 	{
 		const [account]=await this.get({
 			email:data.email
-		})
+		})		
 
 		if(account && account.password===data.password)
 		{
-			return {token:
-				await jwt.sign({
-                    sub: account.id,
-                },process.env.SECRET,{
-                	expiresIn: '3600s'
-                })
-			}
+			const token=await jwt.sign({sub: account.id},process.env.SECRET,{
+            	expiresIn: '3600s'
+            })
+
+			return {token:token,client:account};
 		}else{
 			return 500
 		}

@@ -12,7 +12,8 @@ class SequelizeORM{
 		try
 		{			
 			var instance=new Sequelize(mariadbConfig)
-			this.ModelsInit(instance)			
+			this.ModelsInit(instance)	
+			//await instance.sync()				
 		    await instance.authenticate()
 
 		    console.log('\x1b[34m[+] ~. mariadb connect\x1b[0m');
@@ -23,13 +24,13 @@ class SequelizeORM{
 		}		
 	}
 
-	ModelsInit(instance){		
-		Object.keys(this.models).forEach(entry => {			
-			this.models[entry].init(instance)
-		})
-
-		this.models.Posts.associate(this.models.Users)
-		this.models.Users.associate(this.models.Posts)
+	async ModelsInit(instance:any):void{
+		
+		await this.models.Posts.init(instance)
+		await this.models.Users.init(instance)
+		// associate
+		await this.models.Posts.associate(this.models.Users)
+		await this.models.Users.associate(this.models.Posts)		
 	}
 }
 

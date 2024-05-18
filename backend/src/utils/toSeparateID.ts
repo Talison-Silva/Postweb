@@ -1,1 +1,1 @@
-export const toSeparateID=({id,...props})=> ([id,props])
+export const toSeparateID=({id,...props})=>([id,props])

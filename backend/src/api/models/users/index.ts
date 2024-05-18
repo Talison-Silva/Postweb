@@ -1,8 +1,4 @@
-import { mariadbConfig } from '@/config/sequelize-mariadb.ts';
-import { PostsModel } from '@/api/models/posts/index.ts';
-import {Model,DataTypes,Sequelize} from 'sequelize';
-
-//const sequelize = new Sequelize(mariadbConfig);
+import {Model,DataTypes} from 'sequelize';
 
 class UsersModel extends Model{
 
@@ -14,7 +10,7 @@ class UsersModel extends Model{
                 allowNull:true
             },
             me:{
-                type:DataTypes.STRING,
+                type:DataTypes.STRING(2000),
                 allowNull:true
             },
             email:{

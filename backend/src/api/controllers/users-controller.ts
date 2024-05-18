@@ -39,7 +39,10 @@ export const authenticate=async(req:Request,res:Response)=>
         res.status(response).send()
         break;
       default:
-        res.status(200).send(response)
+        res.status(200).send({
+          client:apiForApplication([response.client]),
+          token:response.token          
+        })
         break
     }
 }

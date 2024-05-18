@@ -22,6 +22,7 @@ export class MariaDB{
 	async post(data){
 		try
 		{
+			console.log('post + data ~ ',data,'tem algo aqui? ~',ClientSequelize.models[this.model].create)
 			await ClientSequelize.models[this.model].create(data);			
 		}
 		catch
