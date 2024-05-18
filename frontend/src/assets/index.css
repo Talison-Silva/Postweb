@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face
+{
+  font-family: 'Roboto Mono';
+  src:url('./fonts/Roboto/RobotoMono-VariableFont_wght.ttf');
+}
+
 *{
   padding:0;
   margin:0;
