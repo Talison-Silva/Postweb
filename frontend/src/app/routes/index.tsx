@@ -4,15 +4,17 @@ import { routes } from "@/app/routes/routes.tsx";
 
 
 export const AppRoutes=({})=>
-{	
-	const applyRoute= ({path,element})=>(<Route exact path={String(path)} element={element}/>);
+{
+	let apply=[];	
+
+	routes.map( ({path,element},key) => {
+		apply.push(<Route exact path={String(path)} element={element} key={key}/>)
+	})
 
 	return(
 		<Router>
 		<ApplyProviders>
-			<Routes>				
-				{routes.map(applyRoute)}				
-			</Routes>
+			<Routes children={apply}/>
 		</ApplyProviders>
 		</Router>
 	)
