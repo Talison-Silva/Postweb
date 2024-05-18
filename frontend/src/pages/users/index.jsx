@@ -6,14 +6,13 @@ import {Hook} from "@/app/hook/hook.ts";
 import styled from 'styled-components';
 
 
-const Container=styled.section`
-    position:relative;
-    width:800px;
-    min-height: min-content;
-
+const Container=styled.section`    
+    width:100%;
+    padding: 80px 50px 50px 50px;
     display:flex;
-    flex-direction:column;
-    gap:20px;
+    justify-content:center;
+    gap:40px;
+    flex-wrap: wrap;
 `
 
 
@@ -21,7 +20,13 @@ export default () =>
 {
     const fetchUsers=async()=>
     {
-        const { data } = await Hook.push('/new-users/').get();setUsers( data );
+        const { data } = await Hook.push('/new-users/').notify({good:{
+            type:'good',
+            notify:{
+                title:'User successfully rescued!',
+                message:'the request made to our API was completed successfully.'
+            }
+        }}).get();setUsers( data );
         setTimeout(() => {setLoading(false)},1000 );
     }
 
