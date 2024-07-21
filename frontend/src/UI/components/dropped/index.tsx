@@ -16,7 +16,6 @@ const Dropped=({schema,toggle,menu,children})=>
 	{			
 		schema.map(entry =>
 		{
-			console.log(entry)
 			response.push(<DroppedNoOpen name={entry.name} method={entry.method} Icon={entry.icon}/>)
 		})
 
@@ -24,18 +23,5 @@ const Dropped=({schema,toggle,menu,children})=>
 	}
 }
 
-
-/*
-return(
-	<>
-	{
-		schema.map(entry => {
-			if(entry.menu){return <DroppedOpen name={entry.name} Icon={entry.icon} schema={entry.menu}/>}
-			else{return <DroppedNoOpen name={entry.name} method={entry.method} Icon={entry.icon}/>}
-		})
-	}
-	</>
-)
-*/
 
 export { Dropped };

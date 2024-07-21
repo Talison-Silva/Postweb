@@ -35,9 +35,14 @@ export class InfraPosts extends MariaDB
 	}
 
 	puted(token,data)
-	{
-		return authorizationJWT( async(decode) => {
+	{				
+		return authorizationJWT( async(decode) => {			
 			var [id,update]=toSeparateID(data);
+
+			if(data.emphasis){
+				update.emphasis=await uploadImage(data.emphasis,'emphasis')
+			}
+
 			return await this.put(id,update);
 		},token)
 	}

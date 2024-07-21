@@ -8,7 +8,8 @@ export default {
     extend: {},
     fontFamily:{
       ubuntu:['Ubuntu', 'sans-serif'],
-      ubuntuMono:['Ubuntu Mono', 'monospace']
+      ubuntuMono:['Ubuntu Mono', 'monospace'],
+      robotoMono:['Roboto Mono', 'monospace']
     },
     letterSpacing: {
       '1': '.4125em',

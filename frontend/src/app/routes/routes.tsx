@@ -1,19 +1,19 @@
 // ---| Postagens |--------------------------------------------------------
 import Users from '@/pages/users/index.jsx'
-import Postagens from '@/pages/postagens/index.jsx'
-import PostagensMore from '@/pages/postagens/actions/more/index.jsx'
-import PostagensEdit from '@/pages/postagens/actions/edit/index.jsx'
-import PostagensCreated from '@/pages/postagens/actions/created/index.jsx'
+import Posts from '@/pages/posts/index.jsx'
+import PostsMore from '@/pages/posts/actions/more/index.jsx'
+import PostsEdit from '@/pages/posts/actions/edit/index.jsx'
+import PostsCreate from '@/pages/posts/actions/create/index.jsx'
 // ---||-------------------------------------------------------------------
 
 // ---| Authentication |---------------------------------------------------
-import Authorization from '@/pages/authentication/authorization/index.jsx';
-import CreateUser from '@/pages/authentication/createUser/index.jsx';
-import Badge from '@/pages/authentication/badge/index.jsx';
+import SignIn from '@/pages/authorization/signIn/index.jsx';
+import SignUp from '@/pages/authorization/signUp/index.jsx';
+import Badge from '@/pages/authorization/badge/index.jsx';
 // ---||-------------------------------------------------------------------
 
 // ---| Layouts |----------------------------------------------------------
-import AuthenticationLayout from '@/UI/layouts/authentication.jsx'
+import AuthorizationLayout from '@/UI/layouts/authentication.jsx'
 import HomeLayout from '@/UI/layouts/home.jsx'
 // ---||-------------------------------------------------------------------
 
@@ -23,39 +23,39 @@ export const routes=[
 	// [Routes] ~ Users - Views	
 	{
 		path:"/signIn",
-		element:<AuthenticationLayout children={<Authorization/>}/>
+		element:<AuthorizationLayout children={<SignIn/>}/>
 	},
 	{
 		path:"/signUp",
-		element:<AuthenticationLayout children={<CreateUser/>}/>
+		element:<AuthorizationLayout children={<SignUp/>}/>
 	},
 	{
 		path:"/badge",
-		element:<AuthenticationLayout authorization={true} children={<Badge/>}/>
+		element:<AuthorizationLayout authorization={true} children={<Badge/>}/>
 	},
 	{
-		path:"/users/",
+		path:"/postweb/users/",
 		element:<HomeLayout children={<Users/>}/>
 	},
 	// [Routes] ~ Posts - Views
 	{
-		path:"/",
+		path:"/postweb/",
 		element:<HomeLayout children={<h1>...funcionou...</h1>} />
 	},
 	{
-		path:"/posts/",
-		element:<HomeLayout children={<Postagens/>}/>
+		path:"/postweb/posts/",
+		element:<HomeLayout children={<Posts/>}/>
 	},	
 	{
-		path:"/posts/create",
-		element:<HomeLayout children={<PostagensCreated/>}/>
+		path:"/postweb/posts/create",
+		element:<HomeLayout children={<PostsCreate/>}/>
 	},
 	{
-		path:"/posts/edit/:id",
-		element:<HomeLayout children={<PostagensEdit/>}/>
+		path:"/postweb/posts/edit/:id",
+		element:<HomeLayout children={<PostsEdit/>}/>
 	},
 	{
-		path:"/posts/more/:id",
-		element:<HomeLayout children={<PostagensMore/>}/>
+		path:"/postweb/posts/more/:id",
+		element:<HomeLayout children={<PostsMore/>}/>
 	}
 ]

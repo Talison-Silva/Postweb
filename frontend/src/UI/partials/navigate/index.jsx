@@ -20,7 +20,7 @@ import {NavigationNVGT,SeparateNVGT,RedirectNVGT,ActionNVGT} from '@/UI/partials
 
 export default ()=>
 {    
-    const [actionCreate,setActionCreate]=useState([false,'create','/posts/create']);
+    const [actionCreate,setActionCreate]=useState([false,'create','/postweb/posts/create']);
     const navigate=useNavigate()
 
     useEffect(()=>{        
@@ -29,9 +29,9 @@ export default ()=>
 
     return(
         <NavigationNVGT>
-            <RedirectNVGT onClick={()=>{navigate('/')}}>home</RedirectNVGT>
-            <RedirectNVGT onClick={()=>{navigate('/posts')}}>posts</RedirectNVGT>
-            <RedirectNVGT onClick={()=>{navigate('/users')}}>users</RedirectNVGT>
+            <RedirectNVGT onClick={()=>{navigate('/postweb/')}}>home</RedirectNVGT>
+            <RedirectNVGT onClick={()=>{navigate('/postweb/posts')}}>posts</RedirectNVGT>
+            <RedirectNVGT onClick={()=>{navigate('/postweb/users')}}>users</RedirectNVGT>
             <SeparateNVGT/>
             <ActionNVGT onClick={()=>{navigate(actionCreate.url)}}>{actionCreate.name}</ActionNVGT>
         </NavigationNVGT>

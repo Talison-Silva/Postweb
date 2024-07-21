@@ -1,6 +1,6 @@
 import Notification from "@/UI/components/notification/index.jsx";
 import { useState,useRef, useEffect } from 'react';
-import styled from 'styled-components';
+import styled,{keyframes} from 'styled-components';
 import { createContext } from 'react';
 
 export const NotificationContext=createContext(undefined);
@@ -10,16 +10,26 @@ interface notify{
 	state:string
 }
 
+const Animate = keyframes`
+0%{
+	opacity: 0%;
+}
+100%{
+	opacity: 100%;
+}
+`
+
 const FloatBox=styled.div`
 	position:fixed;
 	bottom:0;right:0;
 
 	width:min-content;
-	height:min-content;
+	//height:min-content;
+	height: 120px;
 
-	display:flex;
-	flex-direction:column;
-	gap:10px;
+	//display:flex;
+	//flex-direction:column;
+	//gap:10px;
 `
 
 
@@ -34,7 +44,7 @@ export const NotificationProvider = ({children}) =>
 		setNotifications(oldArray => [...oldArray,{id:notifications.length , notify , type}])
 	}
 
-	droppedNotification = ({id}) => {
+	droppedNotification = ({id}) => {		
 		setNotifications(notify => notify.filter(notify => notify.id !== id))
 	}
 

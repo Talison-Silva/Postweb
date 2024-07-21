@@ -47,8 +47,9 @@ export const deleted=async(req:Request,res:Response)=>
 
 
 export const put=async(req:Request,res:Response)=>
-{
-    const params=applicationForApi(req.body)
+{    
+    const params=applicationForApi({...req.body,...req.files})
     var response=await servicesPosts.puted(req.token,params)
     res.status(response).send();
+    //return res.status(204).send();
 }

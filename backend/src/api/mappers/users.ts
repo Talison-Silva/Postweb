@@ -4,8 +4,11 @@ export const applicationForApi=(data)=>
 		username:data.username,
 		email:data.email,
 		password:data.password,
-		me:data.me,
-		photo:data.photo
+		biography:data.biography,
+		birthdate:`${data.day}/${data.month}/${data.year}`,
+		photo:data['profile-picture'],
+		phone:data.phone,
+		gender:data.gender,
 	}
 }
 

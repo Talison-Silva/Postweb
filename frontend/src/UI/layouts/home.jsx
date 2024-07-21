@@ -25,9 +25,9 @@ export default ({children})=>
 	{
 		return(
 			<RootHome>
-				<ContentHome children={children}/>
-				<Header/>
+				<ContentHome children={children}/>				
 				<Footer/>
+				<Header/>
 			</RootHome>
 		)
 	}	

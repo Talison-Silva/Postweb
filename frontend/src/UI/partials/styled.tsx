@@ -91,7 +91,7 @@ export const AccountPhotoHDR=styled.img`
 // ---| Footer |-------------------------------------------
 
 export const FooterInfors=styled.footer`    
-    min-height:56px;
+    min-height:64px;
     padding:40px;
 
     background-color:#084CCF;
@@ -111,16 +111,29 @@ export const FooterLine=styled.div`
 `
 
 export const FooterInforsCategories=styled.div`
-    width: min-content;
-    height:min-content;
+    width: 700px;
+    height:min-content;    
 
     display:flex;    
     gap: 40px;
+    flex-wrap:wrap;
 `
 
 export const FooterInforsCategory=styled.div`
     position:relative;
-    width:200px;
+    min-width:200px;
+    height:min-content;
+    
+    overflow-wrap: break-word;
+
+    display:flex;    
+    flex-direction:column;    
+    gap:10px;
+`
+
+export const FooterInforsPostweb=styled.div`
+    position:relative;
+    width:500px;
     height:min-content;
     
     overflow-wrap: break-word;
@@ -133,6 +146,7 @@ export const FooterInforsCategory=styled.div`
 export const FooterGithub=styled.div`
     width:100%;
     height:min-content;
+    padding:10px;
 
     background-color:#084CCF;
     color:white;
@@ -159,42 +173,6 @@ export const ItemFTR=styled.li`
 `
 
 // ---| Navigate |-----------------------------------------
-
-/*
-export const NavigationNVGT=styled.nav`
-    min-width: min-content;
-    height: 100%;
-`
-
-export const GroupNVGT=styled.ul`
-    display:flex;
-    align-items:center;
-    gap:20px;
-`
-
-export const ItemNVGT=styled.li`
-    min-width: min-content;
-    min-height:min-content;
-`
-
-export const SeparateNVGT=styled.div`
-    width: 0px;
-    height: 16px;
-
-    border-left:3px solid white;
-    border-radius:5px;
-`
-
-
-export const ButtonNVGT=styled.button`
-    text-transform:uppercase;
-    outline:none;
-    color:white;
-    //font-family:'Ubuntu Mono',monospace;
-    font-size:14px;    
-    letter-spacing:.125rem;
-`
-*/
 
 export const NavigationNVGT=styled.div`
     min-width: min-content;height: 100%;

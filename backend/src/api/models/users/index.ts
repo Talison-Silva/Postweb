@@ -9,9 +9,21 @@ class UsersModel extends Model{
                 type:DataTypes.STRING,
                 allowNull:true
             },
-            me:{
+            biography:{
                 type:DataTypes.STRING(2000),
                 allowNull:true
+            },
+            birthdate:{
+                type: DataTypes.STRING,
+                allowNull: false
+            },
+            phone:{
+                type: DataTypes.STRING,
+                allowNull: false
+            },
+            gender:{
+                type: DataTypes.STRING,
+                allowNull: false
             },
             email:{
                 type: DataTypes.STRING,

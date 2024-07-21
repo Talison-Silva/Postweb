@@ -24,10 +24,9 @@ export const DroppedFLT=styled.div`
 export const DroppedMN=styled.div`
 	min-width:155px;
 	min-height:40px;
-	padding:10px 0 10px 0;
-	//background: linear-gradient(45deg,transparent,#262B2B,transparent,#262B2B,transparent,#262B2B);
+	padding:5px 0 5px 0;	
 	backdrop-filter:blur(5px);
-    border:3px dashed #262B2B;	
+    border:2px dashed #262B2B;	
 	border-radius:10px;
 	color:white;
 
@@ -39,13 +38,13 @@ export const DroppedMN=styled.div`
 export const DroppedITM=styled.button`
 	width:100%;
 	position:relative;
-	font-size:1.2125rem;
-	font-family:'Ubuntu Mono',sans-serif;		
-	font-weight: 200;
+	font-size: 1rem;
+	font-family:'Roboto Mono',sans-serif;		
+	font-weight: 500;
 	letter-spacing:.125rem;
 	text-transform:capitalize;
-	padding:5px 10px 5px 10px;
-	border-radius:10px;
+	padding: 2px;
+	//border-radius:10px;
 	color:white;
 	user-select:none;
 

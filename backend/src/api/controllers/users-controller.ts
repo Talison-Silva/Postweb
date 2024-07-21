@@ -50,7 +50,7 @@ export const authenticate=async(req:Request,res:Response)=>
 
 export const register=async(req:Request,res:Response)=>
 {
-	var params=applicationForApi({...req.body,...req.files})	
+	var params=applicationForApi({...req.body,...req.files})
     var response=await servicesUsers.register(params)
     res.status(response).send()
 }

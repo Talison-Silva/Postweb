@@ -13,7 +13,7 @@ class SequelizeORM{
 		{			
 			var instance=new Sequelize(mariadbConfig)
 			this.ModelsInit(instance)	
-			//await instance.sync()				
+			//await instance.sync()
 		    await instance.authenticate()
 
 		    console.log('\x1b[34m[+] ~. mariadb connect\x1b[0m');

@@ -1,6 +1,6 @@
 import {dateComplete} from '@/app/utils/DateComplete/index.js';
-import Users from '@/UI/partials/container-items/user-item.tsx';
 import Loading from "@/UI/components/loading/index.jsx";
+import Users from '@/UI/partials/users/index.tsx';
 import {useEffect,useRef,useState} from "react";
 import {Hook} from "@/app/hook/hook.ts";
 import styled from 'styled-components';
@@ -8,7 +8,7 @@ import styled from 'styled-components';
 
 const Container=styled.section`    
     width:100%;
-    padding: 80px 50px 50px 50px;
+    padding: 100px 50px 100px 50px;
     display:flex;
     justify-content:center;
     gap:40px;

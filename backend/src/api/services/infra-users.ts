@@ -45,12 +45,12 @@ export class InfraUsers extends MariaDB
 	}
 
 	async register(data)
-	{
+	{		
 		if(data.photo)
 		{
 			data.photo=await uploadImage(data.photo,'photo-perfil')
 		}
-
+		
 		var hasUser=await this.get({email:data.email})
 		
 		if(hasUser.length===1)
@@ -58,7 +58,7 @@ export class InfraUsers extends MariaDB
 			return 409
 		}
 		else
-		{
+		{			
 			return await this.post(data)
 		}
 	}
