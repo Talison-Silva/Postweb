@@ -1,0 +1,25 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.App = void 0;
+var express_1 = require("express");
+var body_parser_1 = require("body-parser");
+var cors_1 = require("cors");
+var express_fileupload_1 = require("express-fileupload");
+var path_1 = require("path");
+require("dotenv/config");
+var posts_ts_1 = require("@/routes/posts.ts");
+var users_ts_1 = require("@/routes/users.ts");
+var App = (0, express_1.default)();
+exports.App = App;
+App.use((0, cors_1.default)());
+App.use(express_1.default.json());
+App.use((0, express_fileupload_1.default)({ createParentPath: true }));
+var test = "talison";
+console.log('test ~', test);
+//App.use(express.static(join(import.meta.dirname,'uploads')));
+App.use('/static', express_1.default.static((0, path_1.join)(import.meta.dirname, 'assets', 'upload')));
+App.use(body_parser_1.default.urlencoded({ extended: false }));
+// ~. routers
+//App.use('/application',Postagens);
+App.use('/new-users', users_ts_1.routesSRS);
+App.use('/new-posts', posts_ts_1.routesPSTS);

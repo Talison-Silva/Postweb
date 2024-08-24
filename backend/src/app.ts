@@ -12,14 +12,14 @@ import { routesSRS } from '@/routes/users.ts';
 
 var App=express()
 
+//var vars: Number = "hello";
+//console.log("hello", vars);
 
 
 App.use(cors());
 App.use(express.json());
 App.use( fileUpload({ createParentPath: true }) );
 
-const test:number="talison"
-console.log('test ~',test)
 //App.use(express.static(join(import.meta.dirname,'uploads')));
 App.use('/static',express.static(join(import.meta.dirname,'assets','upload')));
 App.use(bodyParser.urlencoded({extended:false}));
