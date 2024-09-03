@@ -15,32 +15,6 @@ export const applicationForApi=({id,...data})=>
 	return response;
 }
 
-interface User{
-	username:string,
-	photo:object,
-	email:string
-}
-
-
-export interface applicationForApiNew{
-	id?:number,
-	title?:string,
-	description?:string,
-	content?:string,
-	emphasis?:object
-}
-
-
-export interface apiForApplicationNew{
-	id:number,
-	title:string,
-	description:string,
-	content:string,
-	createdAt:string,
-	user:User
-}
-
-
 export const apiForApplication=(data)=>
 {
 	if(typeof data==="number"){return data}

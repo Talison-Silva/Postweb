@@ -12,9 +12,6 @@ import { routesSRS } from '@/routes/users.ts';
 
 var App=express()
 
-//var vars: Number = "hello";
-//console.log("hello", vars);
-
 
 App.use(cors());
 App.use(express.json());

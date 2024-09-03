@@ -173,3 +173,10 @@ dist
 
 # Finder (MacOS) folder config
 .DS_Store
+
+# dotenv
+.env
+
+# upload files
+src/assets/upload/emphasis
+src/assets/upload/photo-perfil

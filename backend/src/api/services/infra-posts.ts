@@ -1,12 +1,11 @@
 import { authorizationJWT } from '@/helpers/authorizationJWT.ts';
-import { PostsModel } from '@/api/models/posts/index.ts';
 import { toSeparateID } from '@/utils/toSeparateID.ts';
 import { uploadImage } from '@/utils/upload-image.ts';
-import { MariaDB } from '@/api/database/mariadb.ts';
+import { Infra } from '@/api/infra/mariadb.ts';
 
 
-export class InfraPosts extends MariaDB
-{	
+
+class InfraPosts extends Infra {	
 	model="Posts";	
 
 	geted(token,filter={})
@@ -47,3 +46,5 @@ export class InfraPosts extends MariaDB
 		},token)
 	}
 }
+
+export default new InfraPosts();

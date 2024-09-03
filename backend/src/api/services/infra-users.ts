@@ -1,13 +1,11 @@
 import { authorizationJWT } from '@/helpers/authorizationJWT.ts';
-import { UsersModel } from '@/api/models/users/index.ts';
-import { toSeparateID } from '@/utils/toSeparateID.ts';
 import { uploadImage } from '@/utils/upload-image.ts';
-import { MariaDB } from '@/api/database/mariadb.ts';
+import { Infra } from '@/api/infra/mariadb.ts';
 import jwt from 'jsonwebtoken';
 
 
-export class InfraUsers extends MariaDB
-{	
+
+class InfraUsers extends Infra {	
 	model="Users";
 
 	geted(token,filters)
@@ -30,14 +28,14 @@ export class InfraUsers extends MariaDB
 	{
 		const [account]=await this.get({
 			email:data.email
-		})		
+		})
 
 		if(account && account.password===data.password)
-		{
+		{		
 			const token=await jwt.sign({sub: account.id},process.env.SECRET,{
             	expiresIn: '3600s'
             })
-
+			
 			return {token:token,client:account};
 		}else{
 			return 500
@@ -46,11 +44,11 @@ export class InfraUsers extends MariaDB
 
 	async register(data)
 	{		
-		if(data.photo)
-		{
+		if(data.photo){
 			data.photo=await uploadImage(data.photo,'photo-perfil')
 		}
 		
+		console.log('register-service :: ',data)
 		var hasUser=await this.get({email:data.email})
 		
 		if(hasUser.length===1)
@@ -63,3 +61,5 @@ export class InfraUsers extends MariaDB
 		}
 	}
 }
+
+export default new InfraUsers();

@@ -1,23 +1,22 @@
-// ---| Dependencies
-import { Request,Response } from 'express';
-// ---||-----------------------------------
-
-// ---| Utilities
-import { packing } from '@/utils/packing.ts';
-import { InfraUsers } from '@/api/services/infra-users.ts';
-// ---||---------------------------------------------------
-
-// ---| Mappers
 import {apiForApplication,applicationForApi} from '@/api/mappers/users.ts';
-// ---||------------------------------------------------------------------------------
+import ServicesUsers from '@/api/services/infra-users.ts';
+import { Request,Response } from 'express';
 
-const servicesUsers=new InfraUsers();
+
+/* .....
+
+{ apiForApplication, applicationForApi } .. Mappers
+{ Request, Response } .. Dependencies
+{ InfraUsers } .. Infra Users
+
+*/// .....
+
 
 
 export const get=async(req:Request,res:Response)=>
 {
 	var filter=JSON.parse(req.query.filter || '{}');
-    var response=apiForApplication( await servicesUsers.geted(req.token,filter) );
+    var response=apiForApplication( await ServicesUsers.geted(req.token,filter) );
 
     switch (typeof response) {
       case "number":
@@ -30,9 +29,11 @@ export const get=async(req:Request,res:Response)=>
 }
 
 
+
+
 export const authenticate=async(req:Request,res:Response)=>
 {
-    var response=await servicesUsers.authenticate(req.body)
+    var response=await ServicesUsers.authenticate(req.body)
 
     switch (typeof response) {
       case "number":
@@ -48,17 +49,21 @@ export const authenticate=async(req:Request,res:Response)=>
 }
 
 
+
+
 export const register=async(req:Request,res:Response)=>
 {
 	var params=applicationForApi({...req.body,...req.files})
-    var response=await servicesUsers.register(params)
+    var response=await ServicesUsers.register(params)
     res.status(response).send()
 }
 
 
+
+
 export const myAccount=async(req:Request,res:Response)=>
 {	
-    var response=apiForApplication( await servicesUsers.myAccount(req.token) )
+    var response=apiForApplication( await ServicesUsers.myAccount(req.token) )
     
     switch (typeof response) {
       case "number":

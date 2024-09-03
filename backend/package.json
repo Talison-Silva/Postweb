@@ -1,14 +1,13 @@
 {
-  "name": "tst",
+  "name": "backend",
   "module": "index.ts",
   "description": "\"Backend of project PostWeb\"",
   "type": "module",
   "scripts": {
     "start": "tsx src/server.ts",
-    "start:dev": "tsc watch ./src/server.ts",
-    "migrate": "tsx ./src/api/ORMs/sequelize.ts",
-    "test": "vitest",
-    "build": "tup"
+    "dev": "tsc watch ./src/server.ts",
+    "build": "tup",
+    "migrate": "bunx sequelize-cli db:migrate"
   },
   "devDependencies": {
     "@types/bun": "latest",
@@ -28,6 +27,7 @@
     "global": "^4.4.0",
     "jsonwebtoken": "^9.0.2",
     "mariadb": "^3.3.1",
+    "mysql2": "^3.11.0",
     "proxyquire": "^2.1.3",
     "rewire": "^7.0.0",
     "save": "^2.9.0",
