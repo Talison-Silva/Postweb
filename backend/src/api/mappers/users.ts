@@ -21,7 +21,7 @@ export const apiForApplication=(data)=>
 	data.map( itm => {		
 		response.push({
 			photo: itm.photo,
-	    	me: itm.me,
+	    	biography: itm.biography,		
 	    	email: itm.email,
 	   		username: itm.username,
 	    	createdAt: itm.createdAt,

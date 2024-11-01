@@ -1,25 +1,33 @@
-// ---| Postagens |--------------------------------------------------------
 import Users from '@/pages/users/index.jsx'
 import Posts from '@/pages/posts/index.jsx'
 import PostsMore from '@/pages/posts/actions/more/index.jsx'
 import PostsEdit from '@/pages/posts/actions/edit/index.jsx'
 import PostsCreate from '@/pages/posts/actions/create/index.jsx'
-// ---||-------------------------------------------------------------------
 
-// ---| Authentication |---------------------------------------------------
-import SignIn from '@/pages/authorization/signIn/index.jsx';
-import SignUp from '@/pages/authorization/signUp/index.jsx';
-import Badge from '@/pages/authorization/badge/index.jsx';
-// ---||-------------------------------------------------------------------
-
-// ---| Layouts |----------------------------------------------------------
-import AuthorizationLayout from '@/UI/layouts/authentication.jsx'
+import AuthorizationLayout from '@/UI/layouts/auth.jsx'
 import HomeLayout from '@/UI/layouts/home.jsx'
-// ---||-------------------------------------------------------------------
+import { Navigate } from 'react-router-dom';
+
+import SignIn from '@/pages/auth/signIn/index.jsx';
+import SignUp from '@/pages/auth/signUp/index.jsx';
+import Badge from '@/pages/auth/badge/index.jsx';
+
+
+/*
+
+Postagens :: {Users, Posts, PostsMore, PostsEdit, PostsCreate }
+Layouts :: {AuthorizationLayout, HomeLayout, Natvigate }
+Authentication :: {SignIn, SingUp, Badge }
+
+*/
 
 
 
-export const routes=[
+export const routes = [
+	{
+		path:"/",
+		element:<Navigate to="/signIn" />
+	},
 	// [Routes] ~ Users - Views	
 	{
 		path:"/signIn",
@@ -57,5 +65,10 @@ export const routes=[
 	{
 		path:"/postweb/posts/more/:id",
 		element:<HomeLayout children={<PostsMore/>}/>
+	},
+	// [Routes] ~ 404
+	{
+		path:"*",
+		element:<h1 className='text-white'>page not found</h1>
 	}
 ]

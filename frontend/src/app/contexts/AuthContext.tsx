@@ -22,6 +22,8 @@ export const AuthProvider = ({children})=>
 	{
 		try{						
 			const {data:{token,client}} = await api.post("/new-users/authenticate",{password,username,email});			
+			console.log('client ::',client)
+
 			cookies.set('token.auth',token,{path:'/',maxAge:3600})			
 			setIsClient(client[0])			
 		}catch(err){			

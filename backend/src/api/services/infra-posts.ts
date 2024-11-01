@@ -32,9 +32,9 @@ class InfraPosts extends Infra {
 			return await this.delete(id)
 		},token)
 	}
-
+	
 	puted(token,data)
-	{				
+	{
 		return authorizationJWT( async(decode) => {			
 			var [id,update]=toSeparateID(data);
 

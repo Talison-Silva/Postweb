@@ -12,10 +12,19 @@ export default ({id,height=256,name="biography",label="your bio",max=2000,cookie
     const [value,setValue]=useState(0);
     const [field]=useField(name);
 
-    useEffect(() => { setValue(field.value.length) },[])
+
+    useEffect(() => {         
+        if(field.value){
+            setValue(field.value.length)
+        }
+    },[])
+
     useEffect(() => {        
-        if(cookie) { cookie(`${name}${id?id:""}`,field.value,{path:`/postagens/`,'maxAge':10000}) }
-        console.log('field',field.value)
+        if(cookie) {
+            cookie(`${name}${id?id:""}`,field.value,{
+                path:`/postagens/`,'maxAge':10000
+            })
+        }
     },[field.value])    
 
     return(

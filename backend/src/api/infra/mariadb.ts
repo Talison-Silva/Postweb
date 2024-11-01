@@ -15,7 +15,7 @@ export class Infra {
 			include = { include: this.models[associate] }
 		}
 
-		return await Models[this.model].findAll({where:{...filter},...include});
+		return await Models[this.model].findAll({where:{...filter},...include});		
 	}
 
 
