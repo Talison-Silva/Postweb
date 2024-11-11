@@ -1,6 +1,5 @@
-# Bem-vindo ao meu projeto
+### PostWeb - Meu Projeto Casca de Bala -
 
-Este projeto tem documentação disponível em dois idiomas:
-
-- [Português (Brasil)](docs/README.pt-br.md)
 - [English (US)](docs/README.en-us.md)
+
+Aqui está a documentação do projeto em português.
