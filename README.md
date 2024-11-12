@@ -16,12 +16,12 @@ bash /scripts/install.sh
 
 apos executar o comando acima, no diretório root, se tudo der certo o projeto já está pronto para ser executado
 
-frontend
+### frontend
 ```shell
 cd app-frontend
 ```
 
-backend
+### backend
 ```shell
 cd app-backend
 
