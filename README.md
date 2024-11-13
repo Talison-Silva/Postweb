@@ -1,49 +1,55 @@
 ## PostWeb - Meu Casca de Bala -
 
-- [English (US)](docs/README.en-us.md)
+### Portugues (BR) | [English (US)](docs/README.en-us.md)
 
 Todo desenvolvedor tem o seu "chodozinho", e esse é o meu. Esse foi o meu primeiro projeto publicado no GitHub, marcando uma fase importante na minha trajetória como programador. No começo, ele era apenas um projeto de curso de Node.js, e a proposta do site era ser uma plataforma de posts com ações CRUD simples: adicionar, editar e deletar posts. E foi assim por um bom tempo — eu chamo essa primeira versão de legacy, e inclusive ela está salva em um repositório privado. Mas, à medida que fui me desenvolvendo como programador, decidi criar meu primeiro site 'sério', ou seja, um projeto onde eu aplicaria todas as tecnologias que já tinha aprendido, para algo mais próximo de um produto real.
 
 ## Como Executar o PostWeb?
-Dentro da pasta scripts existe uma arquivo bash .sh chamado 'install-bun.sh'
-Mesmo que o script automatize o processo,seja o sistema operacional: linux, windows ou mac, necessita ter as dependencias instaladas abaixo.
+Dentro da pasta bash existe uma arquivo .bash chamado 'installer' ele automatiza todo o processo de instalação de dependencias, criação das databases e migrations. ela atua tanto no frontend quanto no backend. Porem ela só automatiza o processo, voçê ainda precisar instalar as dependencias abaixo
 - Mysql | MariaDB
 - Npm | Yarn | Bun
-- Bash
+- Bash | caso voce utilize Windows
 
-Linux & MacOs
+Caso voce já tenha todas as dependencias instaladas na sua Maquina e só seguir as etapas abaixo
+
+### Copiando & Criando o .env
+```bash
+cd app-backend && cp .env.exemple .env
+```
+
+### Configurando o .env
+```env
+DB_PASSWORD=PASSWORD
+DB_DATABASE=DATABASE
+DB_USERNAME=ROOT
+DB_DIALECT=MYSQL
+
+SECRET=JWT
+```
+
+### Executando o 'Installer'
 ```shell
-bash /scripts/install.sh
+cd ../ && bash /scripts/install.sh
 ```
 
 apos executar o comando acima, no diretório root, se tudo der certo o projeto já está pronto para ser executado
 
-### frontend
+### Executando o Frontend
 ```shell
 cd app-frontend
 
-#npm
-npm run start
-
-#yarn
-yarn run start
-
-#bun
-bun run start
+npm run start   # npm
+yarn run start  # yarn
+bun run start   # bun
 ```
 
-### backend
+### Executanto o Backend
 ```shell
 cd app-backend
 
-#npm
-npm run start
-
-#yarn
-yarn run start
-
-#bun
-bun run start
+npm run start   # npm
+yarn run start  # yarn
+bun run start   # bun
 ```
 
-[Manual Installer](docs/installer-manual.pt-br.md)
+### [Instalação Manual](docs/installer-manual.pt-br.md)
