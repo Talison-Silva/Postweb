@@ -1,7 +1,7 @@
 PostWeb - My Baby Project -
 ===
 
-### English (US) | [Portugues (BR)](README.md)
+### English (US) | [Portugues (BR)](../README.md)
 
 Every developer has their 'baby project', and this one’s mine. It was the first project I published on GitHub, marking an important phase in my journey as a programmer. Initially, it was just a Node.js course project, intended to be a simple platform for CRUD operations: adding, editing, and deleting posts. And it stayed like that for a while—I call that first version the 'legacy,' and it’s even saved in a private repository. But as I grew as a developer, I decided to turn it into my first 'serious' website, applying all the technologies I had learned to create something closer to a real-world product.
 
