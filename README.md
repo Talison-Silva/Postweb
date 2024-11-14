@@ -1,23 +1,30 @@
-## PostWeb - Meu Casca de Bala -
+PostWeb - Meu Casca de Bala -
+===
 
 ### Portugues (BR) | [English (US)](docs/README.en-us.md)
 
 Todo desenvolvedor tem o seu "chodozinho", e esse é o meu. Esse foi o meu primeiro projeto publicado no GitHub, marcando uma fase importante na minha trajetória como programador. No começo, ele era apenas um projeto de curso de Node.js, e a proposta do site era ser uma plataforma de posts com ações CRUD simples: adicionar, editar e deletar posts. E foi assim por um bom tempo — eu chamo essa primeira versão de legacy, e inclusive ela está salva em um repositório privado. Mas, à medida que fui me desenvolvendo como programador, decidi criar meu primeiro site 'sério', ou seja, um projeto onde eu aplicaria todas as tecnologias que já tinha aprendido, para algo mais próximo de um produto real.
 
-## Como Executar o PostWeb?
-Dentro da pasta bash existe uma arquivo .bash chamado 'installer' ele automatiza todo o processo de instalação de dependencias, criação das databases e migrations. ela atua tanto no frontend quanto no backend. Porem ela só automatiza o processo, voçê ainda precisar instalar as dependencias abaixo
-- Mysql | MariaDB
-- Npm | Yarn | Bun
-- Bash | caso voce utilize Windows
+Como Executar o PostWeb?
+===
 
-Caso voce já tenha todas as dependencias instaladas na sua Maquina e só seguir as etapas abaixo
+Dentro da pasta `bash`, existe um arquivo `.bash` denominado **installer**. Este arquivo automatiza o processo de instalação das dependências, criação das bases de dados e execução das migrations, abrangendo tanto o frontend quanto o backend. Contudo, ele apenas facilita o processo, você ainda precisará instalar as dependências listadas abaixo, caso ainda não as tenha em sua máquina:
 
-### Copiando & Criando o .env
+- MySQL ou MariaDB
+- NPM, Yarn ou Bun
+- Bash (caso utilize o sistema operacional Windows)
+
+Se as dependências já estiverem instaladas em sua máquina, basta seguir as 3 etapas descritas abaixo.
+
+
+### 1. Copiando & Criando o .env
 ```bash
-cd app-backend && cp .env.exemple .env
+cp app-backend/.env.exemple app-backend/.env
 ```
+Este comando irá copiar o conteúdo do arquivo `.env.exemple` e criar um novo arquivo `.env`, que conterá as mesmas configurações do `.env.exemple`.
 
-### Configurando o .env
+
+### 2. Configurando o .env
 ```env
 DB_PASSWORD=PASSWORD
 DB_DATABASE=DATABASE
@@ -26,13 +33,15 @@ DB_DIALECT=MYSQL
 
 SECRET=JWT
 ```
+Substitua os valores do arquivo `.env` pelos dados correspondentes ao seu usuário **MySQL** e defina uma chave secreta para o **JWT**.
 
-### Executando o 'Installer'
+
+### 3. Executando o **installer**
 ```shell
-cd ../ && bash /scripts/install.sh
+bash app-backend/scripts/install.sh
 ```
+Após a execução do script de instalação, o projeto estará configurado e pronto para ser executado, tanto para o frontend quanto para o backend.
 
-apos executar o comando acima, no diretório root, se tudo der certo o projeto já está pronto para ser executado
 
 ### Executando o Frontend
 ```shell
@@ -42,6 +51,7 @@ npm run start   # npm
 yarn run start  # yarn
 bun run start   # bun
 ```
+
 
 ### Executanto o Backend
 ```shell
