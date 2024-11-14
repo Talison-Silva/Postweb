@@ -38,8 +38,16 @@ Substitua os valores do arquivo `.env` pelos dados correspondentes ao seu usuár
 
 ### 3. Executando o **installer**
 ```shell
-bash app-backend/scripts/install.sh
+./installer --package-manager --channel
 ```
+o **installer** carrega dois parametros, o **package manager** e o **channel** os dois informam como o processo de instalação do projeto deve seguir
+
+| package manager | channel | language |
+| -------- | ------- | ------- |
+| npm | development | pt |
+| yarn | production | en |
+| bun | test |   |
+
 Após a execução do script de instalação, o projeto estará configurado e pronto para ser executado, tanto para o frontend quanto para o backend.
 
 
