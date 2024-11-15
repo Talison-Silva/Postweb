@@ -1,0 +1,90 @@
+#!/bin/bash
+
+function backend_dependecies(){
+    cd app-backend
+    if [ $packageManager == "npm" ]; then
+        if npm install; then
+            backendDependencies=true
+        else
+            backendDependencies=false
+        fi
+    elif [ $packageManager == "yarn" ]; then
+        if yarn install; then
+            backendDependencies=true
+        else
+            backendDependencies=false
+        fi
+    elif [ $packageManager == "bun" ]; then
+        if bun install; then
+            backendDependencies=true
+        else
+            backendDependencies=false
+        fi
+    fi
+}
+
+function backend_database(){
+    if [ $packageManager == "npm" ]; then
+        if npm sequelize-cli db:create --env $channel; then
+            backendDatabases=true
+        else
+            backendDatabases=false
+        fi
+    elif [ $packageManager == "yarn" ]; then
+        if yarn sequelize-cli db:create --env $channel; then
+            backendDatabases=true
+        else
+            backendDatabases=false
+        fi
+    elif [ $packageManager == "bun" ]; then
+        if bun sequelize-cli db:create --env $channel; then
+            backendDatabases=true
+        else
+            backendDatabases=false
+        fi
+    fi
+}
+
+function backend_migrate(){
+    if [ $packageManager == "npm" ]; then
+        if npm sequelize-cli db:migrate --env $channel; then
+            backendMigrations=true
+        else
+            backendMigrations=false
+        fi
+    elif [ $packageManager == "yarn" ]; then
+        if yarn sequelize-cli db:migrate --env $channel; then
+            backendMigrations=true
+        else
+            backendMigrations=false
+        fi
+    elif [ $packageManager == "bun" ]; then
+        if bun sequelize-cli db:migrate --env $channel; then
+            backendMigrations=true
+        else
+            backendMigrations=false
+        fi
+    fi
+}
+
+function frontend_dependecies(){
+    if [ $packageManager == "npm" ]; then
+        if npm install; then
+            frontendDependencies=true
+        else
+            frontendDependencies=false
+        fi
+    elif [ $packageManager == "yarn" ]; then
+        if yarn install; then
+            frontendDependencies=true
+        else
+            frontendDependencies=false
+        fi
+    elif [ $packageManager == "bun" ]; then
+        if bun install; then
+            frontendDependencies=true
+        else
+            frontendDependencies=false
+        fi
+    fi
+}

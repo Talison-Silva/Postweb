@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Colors
+clear="\033[0m"
+gray="\033[38;2;126;126;124m"
+
+# Vars
+channel="development"
+packageManager="npm"
+language="pt"
+
+ending=false
+
+# states process
+backendDependencies=false
+backendDatabases=false
+backendMigrations=false
+frontendDependencies=false

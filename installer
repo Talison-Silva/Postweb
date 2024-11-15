@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# |----------------------------------------
+
+# Source
+source extra/installer/installer-vars
+source extra/installer/installer-functions
+source extra/installer/installer-params
+source extra/installer/installer-process
+
+# |----------------------------------------
+
+# Process
+Process "dependências instaladas" "installed dependencies" "BACKEND"   backend_dependecies
+Process "criando o database"      "creating the database"  "BACKEND"   backend_database
+Process "criando as migrations"   "creating migrations"    "BACKEND"   backend_migrate
+Process "dependências instaladas" "installed dependencies" "FRONTEND"  frontend_dependecies
+
+# |----------------------------------------
+
+end

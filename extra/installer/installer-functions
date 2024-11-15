@@ -1,0 +1,165 @@
+#!/bin/bash
+
+function language(){
+    pt=$1
+    en=$2
+
+    if [ $language == "pt" ]; then
+        echo -e "$pt"
+    else
+        echo -e "$en"
+    fi
+}
+
+
+function script(){
+    #params
+    command=$1
+    color=$2
+    description=$3
+
+    top="╔══ "
+    middle="║ $command"
+    bottom="╚"
+
+    #length=$((${#command}-2))
+    command_lenght=$((${#middle}))
+
+    # Middle
+    if [[ $command_lenght < 61 ]]; then
+        middleResto=$((62-$command_lenght))
+
+        for i in $(seq 1 $middleResto)
+        do
+            middle+=" "
+        done
+        middle+="║"
+    fi
+
+
+    # top
+    bottomLenght=$((${#middle}-2))
+
+    top+="$description "
+    top_resto=$((62-${#top}))
+
+    for i in $(seq 1 $top_resto)
+    do
+        top+="═"
+    done
+        top+="╗"
+
+    # Bottom
+    bottomLenght=$((${#middle}-2))
+
+    for i in $(seq 1 $bottomLenght)
+    do
+        bottom+="═"
+    done
+        bottom+="╝"
+
+    echo -e "\033[38;2;${color}m$top\n$middle\n$bottom\033[0m"
+}
+
+
+function IntialHUB(){
+    clear
+
+    language "idioma selecionado \033[38;2;36;135;90mportuguês\033[0m" "selected language \033[38;2;36;135;90mEnglish\033[0m"
+
+    echo "
+██████╗  █████═╗ ██████╗████████╗██╗     ██╗██████╗██████╗
+██╔══██╗██╔══██║██╔════╝╚══██╔══╝██║ ██╗ ██║██════╝██║  ██
+██████╔╝██║  ██║███████╗   ██║   ██║ ██║ ██║██████╗██████╗
+██╔═══╝ ██║  ██║╚════██║   ██║   ██╚═██╚═██║██════╝██║  ██
+██║     ╚█████╔╝██████╔╝   ██║    ╚██╔═██╔═╝██████╗██████╗
+╚═╝      ╚════╝ ╚═════╝    ╚═╝     ╚═╝ ╚═╝  ╚═════╝╚═════╝
+    "
+
+    language "\033[38;2;126;126;124mgerenciador de pacotes padrão \033[38;2;36;135;90m$packageManager\033[38;2;126;126;124m && canal padrão \033[38;2;36;135;90m$channel\033[0m\n" "\033[38;2;126;126;124mdefault package manager \033[38;2;36;135;90m$packageManager\033[38;2;126;126;124m && default channel \033[38;2;36;135;90m$channel\033[0m\n"
+
+    # Package Manager
+    if [ $packageManager == "npm" ]; then
+        language "\033[38;5;15malterar o gerenciador de pacotes para \033[38;2;36;135;90m+  \033[38;2;126;126;124m--npm\033[0m" "\033[38;5;15mchange package manager for \033[38;2;36;135;90m+  \033[38;2;126;126;124m--npm\033[0m"
+    elif [ $packageManager == "yarn" ]; then
+        language "\033[38;5;15malterar o gerenciador de pacotes para \033[38;2;36;135;90m+  \033[38;2;126;126;124m--yarn\033[0m" "\033[38;5;15mchange package manager for \033[38;2;36;135;90m+  \033[38;2;126;126;124m--yarn\033[0m"
+    elif [ $packageManager == "bun" ]; then
+        language "\033[38;5;15malterar o gerenciador de pacotes para \033[38;2;36;135;90m+  \033[38;2;126;126;124m--bun\033[0m" "\033[38;5;15mchange package manager for \033[38;2;36;135;90m+  \033[38;2;126;126;124m--bun\033[0m"
+    fi
+
+    # Channel
+    if [ $channel == "development" ]; then
+        language "\033[38;5;15mmudar canal para \033[38;2;36;135;90m                     +  \033[38;2;126;126;124m--development\033[0m" "\033[38;5;15mchange cannel for \033[38;2;36;135;90m         +  \033[38;2;126;126;124m--development\033[0m"
+    elif [ $channel == "production" ]; then
+        language "\033[38;5;15mmudar canal para \033[38;2;36;135;90m                     +  \033[38;2;126;126;124m--production\033[0m" "\033[38;5;15mchange cannel for \033[38;2;36;135;90m         +  \033[38;2;126;126;124m--production\033[0m"
+    elif [ $channel == "test" ]; then
+        language "\033[38;5;15mmudar canal para \033[38;2;36;135;90m                     +  \033[38;2;126;126;124m--test\033[0m" "\033[38;5;15mchange cannel for \033[38;2;36;135;90m         +  \033[38;2;126;126;124m--test\033[0m"
+    fi
+
+    if [ $ending == true ]; then
+
+        language "\nrelatório geral" "\ngeneral report"
+        echo "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+"
+
+        if [ $backendDependencies == true ]; then
+            language "\033[38;5;15m - dependências do backend                              \033[38;2;126;126;124m| \033[38;2;36;135;90mBOM\033[0m" "\033[38;5;15m - backend dependencies                                 \033[38;2;126;126;124m| \033[38;2;36;135;90mGOOD\033[0m"
+        else
+            language "\033[38;5;15m - dependências do backend                              \033[38;2;126;126;124m| \033[38;2;158;32;32mMAL\033[0m" "\033[38;5;15m - backend dependencies                                 \033[38;2;126;126;124m| \033[38;2;158;32;32mBAD\033[0m"
+        fi
+
+        if [ $backendDatabases == true ]; then
+            language "\033[38;5;15m - database                                             \033[38;2;126;126;124m| \033[38;2;36;135;90mBOM\033[0m" "\033[38;5;15m - database                                             \033[38;2;126;126;124m| \033[38;2;36;135;90mGOOD\033[0m"
+        else
+            language "\033[38;5;15m - database                                             \033[38;2;126;126;124m| \033[38;2;158;32;32mMAL\033[0m" "\033[38;5;15m - database                                             \033[38;2;126;126;124m| \033[38;2;158;32;32mBAD\033[0m"
+        fi
+
+        if [ $backendMigrations == true ]; then
+            language "\033[38;5;15m - migrations                                           \033[38;2;126;126;124m| \033[38;2;36;135;90mBOM\033[0m" "\033[38;5;15m - migrations                                           \033[38;2;126;126;124m| \033[38;2;36;135;90mGOOD\033[0m"
+        else
+            language "\033[38;5;15m - migrations                                           \033[38;2;126;126;124m| \033[38;2;158;32;32mMAL\033[0m" "\033[38;5;15m - migrations                                           \033[38;2;126;126;124m| \033[38;2;158;32;32mBAD\033[0m"
+        fi
+
+        if [ $frontendDependencies == true ]; then
+            language "\033[38;5;15m - dependências do frontend                             \033[38;2;126;126;124m| \033[38;2;36;135;90mBOM\033[0m" "\033[38;5;15m - frontend dependencies                                \033[38;2;126;126;124m| \033[38;2;36;135;90mGOOD\033[0m"
+        else
+            language "\033[38;5;15m - dependências do frontend                             \033[38;2;126;126;124m| \033[38;2;158;32;32mMAL\033[0m" "\033[38;5;15m - frontend dependencies                                \033[38;2;126;126;124m| \033[38;2;158;32;32mBAD\033[0m"
+        fi
+
+        if [ $backendDependencies == false ] || [ $backendDatabases == false ] || [ $backendMigrations == false ] || [ $frontendDependencies == false ]; then
+            language "\n aconteceu algum erro durante o processo da instalação tente\n instalar manualmente com os comandos abaixo" "\nAn error occurred during the installation process, try \ninstalling manually with the commands below\n"
+
+            if [ $backendDependencies == false ]; then
+                script "cd app-backend && $packageManager install" "173;98;31" "Dependências Backend"
+            fi
+            if [ $backendDatabases == false ]; then
+                script "cd app-backend && $packageManager sequelize-cli db:create --env $channel" "173;98;31" "Database"
+            fi
+            if [ $backendMigrations == false ]; then
+                script "cd app-backend && $packageManager sequelize-cli db:migrate --env $channel" "173;98;31" "Migrations"
+            fi
+            if [ $frontendDependencies == false ]; then
+                script "cd app-frontend && $packageManager install" "173;98;31" "Dependências Frontend"
+            fi
+        fi
+
+        language "\nabra duas abas no terminal e rode os seguintes comando em cada \npara rodar o projeto" "\nopen two tabs in the terminal and run the following commands in \neach to run the project\n"
+        script "cd app-frontend && $packageManager run start" "36;135;90" "Frontend"
+        script "cd app-backend && $packageManager run start" "36;135;90" "Backend"
+
+        echo -e "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n"
+    fi
+}
+
+function Process(){
+    IntialHUB
+    language "\n\033[38;5;15m$1                                 \033[38;2;126;126;124m$3\033[0m" "\n\033[38;5;15m$2                                  \033[38;2;126;126;124m$3$clear"
+
+    echo "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+"
+    $4
+    echo "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+"
+}
+
+function end(){
+    ending=true
+    IntialHUB
+}
