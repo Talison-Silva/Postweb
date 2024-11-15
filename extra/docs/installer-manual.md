@@ -1,5 +1,7 @@
-Manual Backend
-===
+### [Portugues (BR)](../../README.md) | [English (US)](./README.en-us.md)
+
+Backend
+---
 
 ```bash
 cd app-backend
@@ -26,8 +28,8 @@ bun sequelize-cli db:migrate --env development
 bun run start
 ```
 
-Manual Frontend
-===
+Frontend
+---
 
 ```bash
 cd app-frontend
