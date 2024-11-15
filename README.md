@@ -79,4 +79,4 @@ yarn run start  # yarn
 bun run start   # bun
 ```
 
-### [Instalação Manual](extra/docs/installer-manual.pt-br.md)
+### [Instalação Manual](extra/docs/installer-manual.md)

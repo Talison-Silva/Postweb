@@ -80,4 +80,4 @@ yarn run start  # yarn
 bun run start   # bun
 ```
 
-### [manual installation](./installer-manual.en-us.md)
+### [manual installation](./installer-manual.md)
