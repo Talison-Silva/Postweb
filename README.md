@@ -8,7 +8,7 @@ Todo desenvolvedor tem o seu "chodozinho", e esse é o meu. Esse foi o meu prime
 Como Executar o PostWeb?
 ===
 
-Dentro da pasta `bash`, existe um arquivo `.bash` denominado **installer**. Este arquivo automatiza o processo de instalação das dependências, criação das bases de dados e execução das migrations, abrangendo tanto o frontend quanto o backend. Contudo, ele apenas facilita o processo, você ainda precisará instalar as dependências listadas abaixo, caso ainda não as tenha em sua máquina:
+Na raiz do projeto existe um arquivo `bash` denominado **installer**. Este arquivo automatiza o processo de instalação das dependências, criação das bases de dados e execução das migrations, abrangendo tanto o frontend quanto o backend. Contudo, ele apenas facilita o processo, você ainda precisará instalar as dependências listadas abaixo, caso ainda não as tenha em sua máquina:
 
 - MySQL ou MariaDB
 - NPM, Yarn ou Bun
@@ -37,10 +37,11 @@ Substitua os valores do arquivo `.env` pelos dados correspondentes ao seu usuár
 
 
 ### 3. Executando o **installer**
-```shell
-./installer --package-manager --channel
+```bash
+./installer --package-manager --channel --language
+# qualquer ordem de parâmetros é aceita
 ```
-o **installer** carrega dois parametros, o **package manager** e o **channel** os dois informam como o processo de instalação do projeto deve seguir
+o **installer** carrega três parâmetros, o **package manager**, **channel** e o **language** os três informam como o processo de instalação deve proseguir.
 
 | package manager | channel | language |
 | -------- | ------- | ------- |
@@ -48,10 +49,18 @@ o **installer** carrega dois parametros, o **package manager** e o **channel** o
 | yarn | production | en |
 | bun | test |   |
 
+```bash
+./installer --bun --development --pt
+
+# gerenciador de pacote bun
+# canal development
+# e idioma português
+```
+
 Após a execução do script de instalação, o projeto estará configurado e pronto para ser executado, tanto para o frontend quanto para o backend.
 
 
-### Executando o Frontend
+### Rodando o Frontend
 ```shell
 cd app-frontend
 
@@ -61,7 +70,7 @@ bun run start   # bun
 ```
 
 
-### Executanto o Backend
+### Rodando o Backend
 ```shell
 cd app-backend
 
