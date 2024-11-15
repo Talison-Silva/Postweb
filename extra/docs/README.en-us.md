@@ -8,7 +8,7 @@ Every developer has their 'baby project', and this one’s mine. It was the firs
 How to Run PostWeb?
 ===
 
-Inside the `bash` folder, there’s a `.bash` file named **installer**. This file automates the process of installing dependencies, creating databases, and running migrations, covering both the frontend and backend. However, it only simplifies the process—you’ll still need to install the dependencies listed below if you don’t already have them on your machine:
+At the root of the project there is a `bash` file called **installer**. This file automates the process of installing dependencies, creating databases and executing migrations, covering both the frontend and backend. However, it only makes the process easier, you will still need to install the dependencies listed below if you don't already have them on your machine:
 
 - MySQL or MariaDB
 - NPM, Yarn, or Bun
@@ -37,12 +37,28 @@ SECRET=JWT
 Replace the values in the `.env` file with the corresponding data for your **MySQL** user and set a secret key for **JWT**.
 
 
-### 3. Running the **installer**
-```shell
-bash app-backend/scripts/install.sh
+### 3. Executando o **installer**
+```bash
+./installer --package-manager --channel --language
+# any order of parameters is accepted
 ```
-After running the installation script, the project will be configured and ready to run for both the frontend and backend.
+**installer** carries three parameters, **package manager**, **channel** and **language** all three inform how the installation process should proceed.
 
+| package manager | channel | language |
+| -------- | ------- | ------- |
+| npm | development | pt |
+| yarn | production | en |
+| bun | test |   |
+
+```bash
+./installer --bun --development --pt
+
+# gerenciador de pacote bun
+# canal development
+# e idioma português
+```
+
+After running the installation script, the project will be configured and ready to run, both for the frontend and the backend.
 
 
 ### Running the Frontend
