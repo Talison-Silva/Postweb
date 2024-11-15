@@ -53,9 +53,9 @@ Replace the values in the `.env` file with the corresponding data for your **MyS
 ```bash
 ./installer --bun --development --pt
 
-# gerenciador de pacote bun
-# canal development
-# e idioma português
+# bun package manager
+# development channel
+# Portuguese language
 ```
 
 After running the installation script, the project will be configured and ready to run, both for the frontend and the backend.

@@ -54,7 +54,7 @@ o **installer** carrega três parâmetros, o **package manager**, **channel** e 
 
 # gerenciador de pacote bun
 # canal development
-# e idioma português
+# idioma português
 ```
 
 Após a execução do script de instalação, o projeto estará configurado e pronto para ser executado, tanto para o frontend quanto para o backend.
