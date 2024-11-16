@@ -68,6 +68,8 @@ function backend_migrate(){
 }
 
 function frontend_dependecies(){
+    cd ../app-frontend
+
     if [ $packageManager == "npm" ]; then
         if npm install; then
             frontendDependencies=true
